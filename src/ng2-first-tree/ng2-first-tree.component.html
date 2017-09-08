@@ -1,0 +1,6 @@
+<div *ngFor='let a of data'>
+    <div (click)='onNodeClicked(a)' (dblclick)='onToggle(a)'>{{a.text}}</div>
+    <ng-container *ngIf='a.co'>
+        <div *ngFor='let b of a.children' [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)'>{{b.text}}</div>
+    </ng-container>
+</div>

@@ -1,0 +1,34 @@
+{
+    "name": "ng2-first-tree",
+    "version": "1.0.0",
+    "description": "this is a angular2 tree ui",
+    "main": "./bundles/table.umd.js",
+    "module": "./index.js",
+    "typings": "./index.d.ts",
+    "author": "金飞,王博",
+    "license": "MIT",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ascode/ng2-first-tree.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ascode/ng2-first-tree/issues"
+    },
+    "homepage": "https://github.com/ascode/ng2-first-tree#readme",
+    "keywords": [
+        "angular",
+        "typescript",
+        "table",
+        "tree"
+    ],
+    "dependencies": {
+        "lodash": "^4.17.4",
+        "ng2-completer": "^1.2.2"
+    },
+    "peerDependencies": {
+        "@angular/common": "^4.0.0",
+        "@angular/core": "^4.0.0",
+        "@angular/forms": "^4.0.0"
+    }
+}
