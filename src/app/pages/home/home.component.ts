@@ -9,13 +9,14 @@ import { SimpleTreeService } from '../../local_data_services/simple.tree.service
 export class HomeComponent {
   treedata = [];
   settings = {
-    nodeclick: function(obj){
-      console.log("node clicked");
-      console.dir(obj);
-    }
+    nodeclick: this.onclick,
   };
   constructor(private dp: SimpleTreeService){
       this.treedata = dp.getASimpleTree();
+  }
+  onclick(obj){
+    console.log("node clicked");
+    console.dir(obj);
   }
 
 }

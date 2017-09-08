@@ -13,6 +13,31 @@ const SIMPLE_TREE = [
                 text: "计算机系",
                 treeheight: 2,
                 enableclick: true,
+                co:true,
+                children: [
+                    {
+                        id: 6,
+                        text: "一班",
+                        treeheight: 3,
+                        enableclick: true,
+                    },{
+                        id: 7,
+                        text: "二班",
+                        treeheight: 3,
+                        enableclick: true,
+                    },{
+                        id: 8,
+                        text: "三班",
+                        treeheight: 3,
+                        enableclick: true,
+                    }
+                ]
+            },{
+                id: 4,
+                text: "经济系",
+                treeheight: 2,
+                co:true,
+                enableclick: true,
             }
         ]
     },{

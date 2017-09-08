@@ -1,6 +1,13 @@
 <div *ngFor='let a of data'>
-    <div (click)='onNodeClicked(a)' (dblclick)='onToggle(a)'>{{a.text}}</div>
+    <div (click)='onNodeClicked(a)' >{{a.text}}</div>
     <ng-container *ngIf='a.co'>
-        <div *ngFor='let b of a.children' [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)'>{{b.text}}</div>
+        <ng-container  *ngFor='let b of a.children'>
+            <div  [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)'>{{b.text}}</div>
+            <ng-container *ngIf='b.co' >
+                <div [style.margin-left.px]="c.treeheight == 3 ? 60 : 0" *ngFor='let c of b.children' (click)='onNodeClicked(c)'>{{c.text}}</div>
+            </ng-container>
+        </ng-container>
     </ng-container>
+    
+    
 </div>
