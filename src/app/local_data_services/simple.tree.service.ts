@@ -7,6 +7,7 @@ const SIMPLE_TREE = [
         treeheight: 1,
         enableclick: true,
         co: true,
+        addChild: false,
         children: [
             {
                 id: 2,
@@ -56,6 +57,24 @@ const SIMPLE_TREE = [
         ]
     }
 ];
+// 右键菜单的数据
+const MENU_DATA = [{
+    text:"添加",
+    clickFn:function(){
+
+    }
+},{
+    text:"删除",
+    clickFn:function(){
+
+    }
+},{
+    text:"修改",
+    clickFn:function(){
+
+    }
+},];
+
 
 @Injectable()
 export class SimpleTreeService {
