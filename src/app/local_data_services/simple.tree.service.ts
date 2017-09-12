@@ -61,17 +61,18 @@ const SIMPLE_TREE = [
 const MENU_DATA = [{
     text:"添加",
     clickFn:function(){
-
+        console.log("添加");
+        
     }
 },{
     text:"删除",
     clickFn:function(){
-
+        console.log("删除");
     }
 },{
     text:"修改",
     clickFn:function(){
-
+        console.log("修改");
     }
 },];
 
@@ -81,5 +82,8 @@ export class SimpleTreeService {
 
     getASimpleTree(){
         return SIMPLE_TREE;
+    }
+    getMenuData(){
+        return MENU_DATA;
     }
 } 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, ElementRef } from '@angular/core';
+import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { HttpUrlEncodingCodec } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ export class Ng2FirstTreeComponent implements OnChanges {
     temp: any;
     tempTime: any;
     timeout: any;
-    // 选中的对象
+    // 记录右键被选中的对象
     clickedNode: any;
     // 右键菜单的展示控制
     menuShow: boolean = false;
@@ -21,11 +21,11 @@ export class Ng2FirstTreeComponent implements OnChanges {
     top: any;
     left: any;
     
-
     @Input() data: any;
     @Input() settings: any;
 
     //@Output() nodeClicked = new EventEmitter<any>();
+    @ViewChild('position') position: ElementRef;
 
     constructor(private elementRef: ElementRef){
 
@@ -59,28 +59,15 @@ export class Ng2FirstTreeComponent implements OnChanges {
         }
         
     }
-
+    // 双击控制tree的展示隐藏
     onToggle(obj){
         obj.co = !obj.co;
         console.log(obj);
         console.log("双击");
     }
-    // 菜单上的添加，修改，删除事件
-    onAddClick(){
-      this.menuShow = !this.menuShow;
-      
-      console.log("add");
-    }
-
-    onRemoveClick(){
-      this.menuShow = !this.menuShow;
-      
-      console.log("remove");
-      console.log(this.clickedNode);
-    }
-
-    onUpdateClick(){
-      console.log("update");
+    // 菜单上的各种自定义事件   
+    nodeMenuClick(item){
+      item.clickFn(this.clickedNode);
       this.menuShow = !this.menuShow;
       
     }
@@ -94,10 +81,8 @@ export class Ng2FirstTreeComponent implements OnChanges {
       this.menuShow = !this.menuShow;
       // 把被点击的对象存储
       this.clickedNode = obj;
-  
+      console.log(this.position);
+      
       console.log(obj,"点击了右键");
-      console.log(event.pageX, event.pageY);      
     }
-    
-
 }
