@@ -1,0 +1,18 @@
+.tree-container{
+    .contextmenu{
+        position: absolute;
+        z-index: 100;
+        background: #cccccc;
+        .list{
+            list-style: none;
+            padding: 0 ;
+            margin: 0 ;
+            .list-item{
+                border: 1px solid #000000;
+                min-width: 50px;
+                text-align: center;
+            }
+        }
+    }
+}
+
