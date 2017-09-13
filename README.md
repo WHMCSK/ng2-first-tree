@@ -1,12 +1,6 @@
-![Build Status](https://travis-ci.org/akveo/ng2-first-table.svg?branch=master)
 
 # Angular2 first tree 组件
 
-### Demo
-
-<a target="_blank" href="http://192.168.2.244:4200">查看演示</a>
-
-![alt tag](src/assets/img/demo.gif)
 
 ## 安装
 
@@ -46,8 +40,7 @@ import { Ng2FirstTreeModule } from 'ng2-first-tree';
 // ...
 ```
 
-现在，我们需要配置表并将其添加到模板中。 组件开始工作的唯一必需设置是列配置。 我们在组件中注册设置属性，我们想要具有表并配置一些列[设置文档](http://192.168.2.244:4200/#/documentation)：
-    
+现在，我们需要配置数据并将其添加到模板中。 组件开始工作的唯一必需设置是数据配置，我们在组件中注册设置数据属性。
 ```
 data = [
     {
@@ -95,10 +88,42 @@ data = [
         ]
     }
 ];
+
+```
+我们还需要配置一些其他的属性，如右键菜单展示的结构，单击时触发的事件，展示隐藏时候的图标class名
+
+```
 settings = {
-  nodeclick: function(){
-    console.log("单击事件的处理函数");
-  },
+    menu: [{
+        text:"添加兄弟节点",
+        clickFn:function(nodeobj){
+        console.log(nodeobj);
+            console.log("添加兄弟节点");          
+        }
+    },{
+        text:"添加子节点",
+        clickFn:function(nodeobj){
+        console.log(nodeobj);
+            console.log("添加子节点");  
+        }
+    },{
+        text:"删除",
+        clickFn:function(nodeobj){
+        console.log(nodeobj);
+            console.log("删除");
+        }
+    },{
+        text:"修改",
+        clickFn:function(nodeobj){
+        console.log(nodeobj);
+            console.log("修改");
+        }
+    },],
+    nodeclick: function(){
+        console.log("单击事件的处理函数");
+    },
+    showicon: "ion-arrow-down-b",
+    hideicon: "ion-arrow-right-b",
 }
 ```
 
@@ -118,12 +143,11 @@ settings = {
 
 现在你有一些数据在树中。
  
-## 进一步的文档
-安装，定制等有用的文档: https://ascode.github.io/ng2-first-table/
+
 
 ## How can I support developers?
 
-- 可以关注我们的：[Github](https://github.com/wangraoji/ng2-first-table)
+- 可以关注我们的：[Github](https://github.com/wang-cola/ng2-first-tree)
 - 创建拉请求，提交错误，建议新功能
 
 

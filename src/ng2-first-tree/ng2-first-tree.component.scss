@@ -1,4 +1,11 @@
 .tree-container{
+    cursor:pointer;
+    user-select: none;
+    
+    .fonticon{
+        font-size: 20px;
+        padding: 0 5px;
+    }
     .contextmenu{
         position: absolute;
         z-index: 100;
@@ -7,10 +14,14 @@
             list-style: none;
             padding: 0 ;
             margin: 0 ;
+            cursor:pointer;
             .list-item{
                 border: 1px solid #000000;
                 min-width: 50px;
                 text-align: center;
+                &:hover{
+                    background: #eeeeee;
+                }
             }
         }
     }

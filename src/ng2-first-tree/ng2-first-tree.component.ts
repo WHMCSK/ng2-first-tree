@@ -7,7 +7,7 @@ import { HttpUrlEncodingCodec } from '@angular/common/http';
   styleUrls: ['./ng2-first-tree.component.scss'],
   templateUrl: './ng2-first-tree.component.html',
 })
-export class Ng2FirstTreeComponent implements OnChanges {
+export class Ng2FirstTreeComponent {
 
   // 双击事件的控制
   temp: any;
@@ -20,28 +20,21 @@ export class Ng2FirstTreeComponent implements OnChanges {
   // 右键菜单的定位位置
   top: any;
   left: any;
+  // 搜索框的值
+  searchValue: any;
 
   @Input() data: any;
   @Input() settings: any;
 
-  //@Output() nodeClicked = new EventEmitter<any>();
-
-
   constructor(private elementRef: ElementRef) {
-    let athis = this;
-    document.body.onclick = function (event) {
-
-      if (athis.menuShow == true) {
-        athis.menuShow = false;
+    // 点击body关闭右键菜单
+    document.body.onclick = (event) => {
+      if (this.menuShow == true) {
+        this.menuShow = false;
         event.stopPropagation();
       }
     }
-
     
-  }
-
-  ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-
   }
 
   onNodeClicked(obj) {
@@ -113,4 +106,32 @@ export class Ng2FirstTreeComponent implements OnChanges {
     obj.co = !obj.co;
     event.stopPropagation();
   }
+  // 全部显示隐藏控制方法---开始
+  allShow(){
+    this.data.forEach(item => {
+      this.open(item);
+    });
+  }
+  open(obj) {
+    obj.co = true;
+    if(obj.children) {
+        for(let i of obj.children) {
+            this.open(i)
+        }
+    }
+  }
+  allHide(){
+    this.data.forEach(item => {
+      this.close(item);
+    });
+  }
+  close(obj) {
+    obj.co = false;
+    if(obj.children) {
+        for(let i of obj.children) {
+            this.close(i)
+        }
+    }
+  }
+  // 全部显示隐藏方法---结束
 }

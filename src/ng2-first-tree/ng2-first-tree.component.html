@@ -1,23 +1,29 @@
 <div style="position: relative;" class="tree-container">
+    <div class="search-wrapper">
+        <button (click)="allShow()">全部展开</button>
+        <button (click)="allHide()">全部收起</button>
+        <input type="text" name="" id="" [(ngModel)]="searchValue">
+        <button>搜索</button>
+    </div>
     <div *ngFor='let a of data'>
         <div #div1 (click)='onNodeClicked(a)' (contextmenu)="rightClick(a, $event,div1)">
             <div>
-                <i class="ion-arrow-right-b" *ngIf="a.children&&!a.co" (click)="showTree(a,$event)"></i>
-                <i class="ion-arrow-down-b" *ngIf="a.children&&a.co" (click)="showTree(a,$event)"></i> 
+                <i class="{{settings.hideicon}} fonticon" *ngIf="a.children&&!a.co" (click)="showTree(a,$event)"></i>
+                <i class="{{settings.showicon}} fonticon" *ngIf="a.children&&a.co" (click)="showTree(a,$event)"></i> 
                 {{a.text}}
             </div>
         </div>
         <ng-container *ngIf='a.co'>
             <ng-container *ngFor='let b of a.children'>
                 <div #div2 [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)' (contextmenu)="rightClick(b, $event,div2)">
-                        <i class="ion-arrow-right-b" *ngIf="b.children&&!b.co" (click)="showTree(b,$event)"></i>
-                        <i class="ion-arrow-down-b" *ngIf="b.children&&b.co" (click)="showTree(b,$event)"></i>  
+                        <i class="{{settings.hideicon}} fonticon" *ngIf="b.children&&!b.co" (click)="showTree(b,$event)"></i>
+                        <i class="{{settings.showicon}} fonticon" *ngIf="b.children&&b.co" (click)="showTree(b,$event)"></i>  
                     {{b.text}}
                 </div>
                 <ng-container *ngIf='b.co'>
                     <div #div3 [style.margin-left.px]="c.treeheight == 3 ? 60 : 0" *ngFor='let c of b.children' (click)='onNodeClicked(c)' (contextmenu)="rightClick(c, $event,div3)">
-                            <i class="ion-arrow-right-b" *ngIf="c.children&&!c.co" (click)="showTree(c,$event)" ></i>
-                            <i class="ion-arrow-down-b" *ngIf="c.children&&c.co" (click)="showTree(c,$event)"></i>  
+                            <i class="{{settings.hideicon}} fonticon" *ngIf="c.children&&!c.co" (click)="showTree(c,$event)" ></i>
+                            <i class="{{settings.showicon}} fonticon" *ngIf="c.children&&c.co" (click)="showTree(c,$event)"></i>  
                         {{c.text}}
                     </div>
                 </ng-container>
