@@ -29,8 +29,8 @@ export class Ng2FirstTreeComponent implements OnChanges {
 
   constructor(private elementRef: ElementRef) {
     let athis = this;
+    // 点击body关闭右键菜单
     document.body.onclick = function (event) {
-
       if (athis.menuShow == true) {
         athis.menuShow = false;
         event.stopPropagation();

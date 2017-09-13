@@ -40,8 +40,8 @@ export class HomeComponent {
   settings = {
     menu: this.MENU_DATA,
     nodeclick: this.onclick,
-    showicon: "",
-    hideicon: "",
+    showicon: "ion-arrow-down-b",
+    hideicon: "ion-arrow-right-b",
   };
   
   constructor(private dp: SimpleTreeService){
