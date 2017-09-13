@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 const SIMPLE_TREE = [
     {
@@ -85,5 +86,9 @@ export class SimpleTreeService {
     }
     getMenuData(){
         return MENU_DATA;
+    }
+    // 异步promise
+    getTreeData(): Promise<any>{
+        return Promise.resolve(SIMPLE_TREE);
     }
 } 
