@@ -3,30 +3,32 @@
         <button (click)="allShow()">全部展开</button>
         <button (click)="allHide()">全部收起</button>
         <input type="text" name="" id="" [(ngModel)]="searchValue">
-        <button>搜索</button>
+        <button (click)="onSubmit(searchValue)">搜索</button>
     </div>
     <div *ngFor='let a of data'>
         <div #div1 (click)='onNodeClicked(a)' (contextmenu)="rightClick(a, $event,div1)">
-            <div>
-                <i class="{{settings.hideicon}} fonticon" *ngIf="a.children&&!a.co" (click)="showTree(a,$event)"></i>
-                <i class="{{settings.showicon}} fonticon" *ngIf="a.children&&a.co" (click)="showTree(a,$event)"></i> 
+            <div *ngIf="a.visiable">
+                <i class="{{settings.hideicon}} fonticon" *ngIf="a.children&&a.collapse" (click)="showTree(a,$event)"></i>
+                <i class="{{settings.showicon}} fonticon" *ngIf="a.children&&!a.collapse" (click)="showTree(a,$event)"></i> 
                 {{a.text}}
             </div>
         </div>
-        <ng-container *ngIf='a.co'>
+        <ng-container *ngIf='!a.collapse'>
             <ng-container *ngFor='let b of a.children'>
-                <div #div2 [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)' (contextmenu)="rightClick(b, $event,div2)">
-                        <i class="{{settings.hideicon}} fonticon" *ngIf="b.children&&!b.co" (click)="showTree(b,$event)"></i>
-                        <i class="{{settings.showicon}} fonticon" *ngIf="b.children&&b.co" (click)="showTree(b,$event)"></i>  
+                <div #div2 *ngIf="b.visiable" [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)' (contextmenu)="rightClick(b, $event,div2)">
+                        <i class="{{settings.hideicon}} fonticon" *ngIf="b.children&&b.collapse" (click)="showTree(b,$event)"></i>
+                        <i class="{{settings.showicon}} fonticon" *ngIf="b.children&&!b.collapse" (click)="showTree(b,$event)"></i>  
                     {{b.text}}
                 </div>
-                <ng-container *ngIf='b.co'>
+                <ng-container *ngIf='!b.collapse'>
                     <div #div3 [style.margin-left.px]="c.treeheight == 3 ? 60 : 0" *ngFor='let c of b.children' (click)='onNodeClicked(c)' (contextmenu)="rightClick(c, $event,div3)">
-                            <i class="{{settings.hideicon}} fonticon" *ngIf="c.children&&!c.co" (click)="showTree(c,$event)" ></i>
-                            <i class="{{settings.showicon}} fonticon" *ngIf="c.children&&c.co" (click)="showTree(c,$event)"></i>  
-                        {{c.text}}
+                        <ng-container *ngIf="c.visiable">
+                            <i class="{{settings.hideicon}} fonticon" *ngIf="c.children&&c.collapse" (click)="showTree(c,$event)" ></i>
+                            <i class="{{settings.showicon}} fonticon" *ngIf="c.children&&!c.collapse" (click)="showTree(c,$event)"></i>  
+                            {{c.text}}
+                        </ng-container>                    
                     </div>
-                </ng-container>
+                </ng-container>  
             </ng-container>
         </ng-container>
 

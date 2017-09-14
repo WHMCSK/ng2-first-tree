@@ -26,6 +26,8 @@ export class Ng2FirstTreeComponent {
   @Input() data: any;
   @Input() settings: any;
 
+  @Output() onSubmited = new EventEmitter();
+
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
@@ -71,7 +73,7 @@ export class Ng2FirstTreeComponent {
   }
   // 双击控制tree的展示隐藏
   onToggle(obj) {
-    obj.co = !obj.co;
+    obj.collapse = !obj.collapse;
     console.log(obj);
     console.log("双击");
   }
@@ -103,7 +105,7 @@ export class Ng2FirstTreeComponent {
   }
   // 图标上的单击事件
   showTree(obj,event){
-    obj.co = !obj.co;
+    obj.collapse = !obj.collapse;
     event.stopPropagation();
   }
   // 全部显示隐藏控制方法---开始
@@ -113,7 +115,7 @@ export class Ng2FirstTreeComponent {
     });
   }
   open(obj) {
-    obj.co = true;
+    obj.collapse = false;
     if(obj.children) {
         for(let i of obj.children) {
             this.open(i)
@@ -126,7 +128,7 @@ export class Ng2FirstTreeComponent {
     });
   }
   close(obj) {
-    obj.co = false;
+    obj.collapse = true;
     if(obj.children) {
         for(let i of obj.children) {
             this.close(i)
@@ -134,4 +136,12 @@ export class Ng2FirstTreeComponent {
     }
   }
   // 全部显示隐藏方法---结束111
+  onSubmit(searchValue){
+    this.onSubmited.emit(searchValue)
+    this.searchValue = "";
+  }
+
+  // insertTreeNode(currentNode,newNode,relationType){
+    
+  // }
 }
