@@ -1,9 +1,12 @@
 <div style="position: relative;" class="tree-container">
     <div class="search-wrapper">
-        <button (click)="allShow()">全部展开</button>
-        <button (click)="allHide()">全部收起</button>
-        <input type="text" name="" id="" [(ngModel)]="searchValue">
-        <button (click)="onSubmit(searchValue)">搜索</button>
+        <div class="search">
+            <input class="search-input" type="text" name="" id="" [(ngModel)]="searchValue">
+            <button class="search-btn" (click)="onSubmit(searchValue)">搜索</button>
+        </div> 
+        <button class="all-btn" (click)="allShow()">全部展开</button>
+        <button class="all-btn" (click)="allHide()">全部收起</button>
+           
     </div>
     <div *ngFor='let a of data'>
         <div #div1 (click)='onNodeClicked(a)' (contextmenu)="rightClick(a, $event,div1)">

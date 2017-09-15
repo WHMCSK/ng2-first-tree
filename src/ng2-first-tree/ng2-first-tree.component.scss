@@ -1,6 +1,25 @@
 .tree-container{
     cursor:pointer;
     user-select: none;
+    .search-wrapper{
+        margin-bottom: 5px;
+        .all-btn{
+            min-width: 40px;
+            font-size: 12px;
+        }
+        .search{
+            margin-bottom: 5px;
+            .search-input{
+                width: 100px;
+                height: 24px;
+            }
+            .search-btn{
+                min-width: 50px;
+                font-size: 12px;
+                vertical-align: middle;
+            }
+        }
+    }
     
     .fonticon{
         font-size: 20px;
