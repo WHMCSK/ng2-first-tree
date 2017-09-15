@@ -12,23 +12,22 @@ export class HomeComponent {
 
   addBroFn(nodeobj){
     console.log(nodeobj);
-      console.log("添加");
+      console.log("添加兄弟节点");
       let new_tree;
       //new_tree = this.dp.transitionData(this.NEW_DATA);
       console.log(this.dp);
-      
 }
 
   // 右键菜单的数据
-  MENU_DATA = [{
+  MENU_DATA = 
+  [{
     text:"添加兄弟节点",
     clickFn: this.addBroFn,
   },{
     text:"添加子节点",
     clickFn:function(nodeobj){
       console.log(nodeobj);
-        console.log("添加");
-        
+        console.log("添加子节点");     
     }
   },{
     text:"删除",

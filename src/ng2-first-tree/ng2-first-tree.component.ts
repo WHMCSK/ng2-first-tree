@@ -80,8 +80,6 @@ export class Ng2FirstTreeComponent {
   nodeMenuClick(item) {
     item.clickFn(this.clickedNode);
     this.menuShow = !this.menuShow;
-
-
   }
 
   // 右键点击事件
@@ -108,36 +106,36 @@ export class Ng2FirstTreeComponent {
     event.stopPropagation();
   }
   // 全部显示隐藏控制方法---开始
-  allShow(){
+  allShow() {
     this.data.forEach(item => {
       this.open(item);
     });
   }
   open(obj) {
     obj.collapse = false;
-    if(obj.children) {
-        for(let i of obj.children) {
-            this.open(i)
+    if (obj.children) {
+        for (let i of obj.children) {
+            this.open(i);
         }
     }
   }
-  allHide(){
+  allHide() {
     this.data.forEach(item => {
       this.close(item);
     });
   }
   close(obj) {
     obj.collapse = true;
-    if(obj.children) {
-        for(let i of obj.children) {
-            this.close(i)
+    if (obj.children) {
+        for (let i of obj.children) {
+            this.close(i);
         }
     }
   }
   // 全部显示隐藏方法---结束111
-  onSubmit(searchValue){
+  onSubmit(searchValue) {
     this.onSubmited.emit(searchValue)
-    this.searchValue = "";
+    this.searchValue = '';
   }
 
   // insertTreeNode(currentNode,newNode,relationType){

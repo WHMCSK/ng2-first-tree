@@ -10,6 +10,7 @@
             <div *ngIf="a.visiable">
                 <i class="{{settings.hideicon}} fonticon" *ngIf="a.children&&a.collapse" (click)="showTree(a,$event)"></i>
                 <i class="{{settings.showicon}} fonticon" *ngIf="a.children&&!a.collapse" (click)="showTree(a,$event)"></i> 
+                <i class=" ion-record fonticon1" *ngIf="!a.children" ></i> 
                 {{a.text}}
             </div>
         </div>
@@ -17,7 +18,8 @@
             <ng-container *ngFor='let b of a.children'>
                 <div #div2 *ngIf="b.visiable" [style.margin-left.px]="b.treeheight == 2 ? 30 : 0" (click)='onNodeClicked(b)' (contextmenu)="rightClick(b, $event,div2)">
                         <i class="{{settings.hideicon}} fonticon" *ngIf="b.children&&b.collapse" (click)="showTree(b,$event)"></i>
-                        <i class="{{settings.showicon}} fonticon" *ngIf="b.children&&!b.collapse" (click)="showTree(b,$event)"></i>  
+                        <i class="{{settings.showicon}} fonticon" *ngIf="b.children&&!b.collapse" (click)="showTree(b,$event)"></i>
+                        <i class=" ion-record fonticon1" *ngIf="!b.children" ></i>                        
                     {{b.text}}
                 </div>
                 <ng-container *ngIf='!b.collapse'>
@@ -25,6 +27,7 @@
                         <ng-container *ngIf="c.visiable">
                             <i class="{{settings.hideicon}} fonticon" *ngIf="c.children&&c.collapse" (click)="showTree(c,$event)" ></i>
                             <i class="{{settings.showicon}} fonticon" *ngIf="c.children&&!c.collapse" (click)="showTree(c,$event)"></i>  
+                            <i class=" ion-record fonticon1" *ngIf="!c.children" ></i> 
                             {{c.text}}
                         </ng-container>                    
                     </div>
@@ -33,7 +36,7 @@
         </ng-container>
 
     </div>
-    <div class="contextmenu" *ngIf="menuShow&&setting.menu.length!=0" #contextmenu [ngStyle]="{'top.px': top,'left.px': left}">
+    <div class="contextmenu" *ngIf="menuShow&&settings.menu.length!=0" #contextmenu [ngStyle]="{'top.px': top,'left.px': left}">
         <ul class="list">
             <li class="list-item" *ngFor="let item of settings.menu" (click)="nodeMenuClick(item)">{{item.text}}</li>
         </ul>
