@@ -1,5 +1,6 @@
 import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
+import { HttpUrlEncodingCodec } from '@angular/common/http';
 
 @Component({
   selector: 'ng2-first-tree',
@@ -7,7 +8,6 @@ import { AfterViewInit } from '@angular/core';
   templateUrl: './ng2-first-tree.component.html',
 })
 export class Ng2FirstTreeComponent {
-
   // 双击事件的控制
   temp: any;
   tempTime: any;
@@ -21,32 +21,69 @@ export class Ng2FirstTreeComponent {
   left: any;
   // 搜索框的值
   searchValue: any;
-
+  parentUl: any;
+  // 子组件定义的值传个父组件。可以方在子组件的标签上用、
   @Input() data: any;
   @Input() settings: any;
-
-  @Output() onSubmited = new EventEmitter();
+  // 子传父，点击者。
+  // @Output() mouseEnter = new EventEmitter<any>();
+  // @Output() toggleSubMenu = new EventEmitter<any>();
 
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
-      if (this.menuShow == true) {
+      if (this.menuShow === true) {
         this.menuShow = false;
         event.stopPropagation();
       }
-    }
-    
+    };
   }
+  ngOnInit(): void { }
+  // 清除同级类名
+  clearFn() {
+    const uls = this.elementRef.nativeElement.querySelectorAll(`.select ul`);
+    uls.forEach(ele => {
+      ele.setAttribute('class', 'a');
+    });
+  }
+  // 鼠标进入
+  // onMouseEnter(e, a) {
+  //   // console.info(a);
+  //   // console.info(e);
+  //   this.mouseEnter.emit(a);
+  // }
 
-  onNodeClicked(obj) {
-
+  // 传过来点击者对象。
+  onNodeClicked(e, obj) {
+    this.clearFn();
+    // e.target.localName 表示当前点击的元素
+    // this.parentUl = 当前父元素UL
+    // 1 如果点击的是 i 或者 span 时候，他的父元素一定是 li
+    // 1.1 如果他的父元素是li 的时候，那么找li 的父元素 ul
+    // 2 如果点击的 li 标签，那么他的父元素是 ul
+    // 2.1 那么就取li得父元素
+    // 3 如果点击的是ul 那么直接去当前元素
+    // 4 找到UL之后，给当前 .className = "div3 zidingyi";
+    // 4.1 它的兄弟元素 .className = "div3";
+    // console.info(e.target.parentNode);
+    if (e.target.localName === `li`) {
+      this.parentUl = e.target.parentNode;
+      this.parentUl.setAttribute('class', 'selected');
+    }
+    if (e.target.localName === `ul`) {
+      this.parentUl = e.target;
+      this.parentUl.setAttribute('class', 'selected');
+    }
+    if (e.target.localName === `span` || e.target.localName === `i`) {
+      this.parentUl = e.target.parentNode.parentNode;
+      this.parentUl.setAttribute('class', 'selected');
+    }
     // 在菜单展开的时候，阻止单击事件
-    if (this.menuShow == true) {
+    if (this.menuShow === true) {
       this.menuShow = false;
       event.stopPropagation();
       return;
     }
-
     clearTimeout(this.timeout);
     if (!this.temp) {
       this.temp = new Date();
@@ -54,27 +91,24 @@ export class Ng2FirstTreeComponent {
       this.tempTime = this.temp;
       this.temp = new Date();
     }
-
     // 单击事件倒计时
     this.timeout = setTimeout(() => {
       this.settings.nodeclick(obj);
-      console.log("单击");
+      // console.info(`单击`);
     }, 300);
 
     // 两次点击时间差
-    let clickBuffer = this.temp - this.tempTime;
+    const clickBuffer = this.temp - this.tempTime;
     // 如果双击 立即执行双击函数 并且清除单击事件倒计时
     if (clickBuffer && clickBuffer < 300) {
       this.onToggle(obj);
       clearTimeout(this.timeout);
     }
-
   }
   // 双击控制tree的展示隐藏
   onToggle(obj) {
-    obj.collapse = !obj.collapse;
-    console.log(obj);
-    console.log("双击");
+    obj.co = !obj.co;
+    console.info(`双击`);
   }
   // 菜单上的各种自定义事件   
   nodeMenuClick(item) {
@@ -84,25 +118,24 @@ export class Ng2FirstTreeComponent {
 
   // 右键点击事件
   rightClick(obj, event, htmlnode) {
+    // 添加背景色
+    this.onNodeClicked(event, obj);
     event.preventDefault();
-
     this.menuShow = !this.menuShow;
     // 把被点击的对象存储
     this.clickedNode = obj;
     // 获取点击div距离父节点的距离
-    let left = htmlnode.offsetLeft;
-    let top = htmlnode.offsetTop + htmlnode.clientHeight;
     // 把当前点击点的坐标赋值给菜单div的top left
-
-    this.top = top;
-    this.left = left;
-
-    console.log(this.left + "============" + this.top);
-    console.log(obj, "点击了右键");
+    this.top = htmlnode.offsetTop + 30;
+    this.left = 55; 
+    // this.left = htmlnode.offsetLeft + 80;
+    // 用margin值会影响右键
+    // console.info(`${this.left}============ ${this.top}`);
+    console.info(obj, `点击了右键`);
   }
   // 图标上的单击事件
-  showTree(obj,event){
-    obj.collapse = !obj.collapse;
+  showTree(obj, event) {
+    obj.co = !obj.co;
     event.stopPropagation();
   }
   // 全部显示隐藏控制方法---开始
@@ -112,11 +145,11 @@ export class Ng2FirstTreeComponent {
     });
   }
   open(obj) {
-    obj.collapse = false;
+    obj.co = true;
     if (obj.children) {
-        for (let i of obj.children) {
-            this.open(i);
-        }
+      for (let i of obj.children) {
+        this.open(i);
+      }
     }
   }
   allHide() {
@@ -125,20 +158,14 @@ export class Ng2FirstTreeComponent {
     });
   }
   close(obj) {
-    obj.collapse = true;
+    obj.co = false;
     if (obj.children) {
-        for (let i of obj.children) {
-            this.close(i);
-        }
+      for (let i of obj.children) {
+        this.close(i);
+      }
     }
   }
   // 全部显示隐藏方法---结束111
-  onSubmit(searchValue) {
-    this.onSubmited.emit(searchValue)
-    this.searchValue = '';
-  }
 
-  // insertTreeNode(currentNode,newNode,relationType){
-    
-  // }
+  
 }

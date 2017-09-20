@@ -54,10 +54,11 @@ export class HomeComponent {
   settings = {
     menu: this.MENU_DATA,
     nodeclick: this.onclick,
-    showicon: "ion-arrow-down-b",
-    hideicon: "ion-arrow-right-b",
-    filterstyle: "isshow",//isshow|mark
-    filtertype: "clientfilter",//serverfilter|clientfilter
+    showicon: `icon ion-filing`,
+    hideicon: `icon ion-folder`,
+    wenjicon: `icon ion-document-text`,
+    filterstyle: `isshow`,//isshow|mark
+    filtertype: `clientfilter`,//serverfilter|clientfilter
   };
   
   constructor(private dp: SimpleTreeService){
@@ -68,11 +69,11 @@ export class HomeComponent {
       });
   }
   onclick(obj){
-    console.log("node clicked");
+    console.info(`node clicked`);
     console.dir(obj);
   }
   search(value){
-    console.log("搜索值", value);
+    console.info(`搜索值`, value);
     this.treedata.forEach(item => {
       this.checkdata(item,value);
     });
@@ -81,12 +82,12 @@ export class HomeComponent {
       this.checkdata1(item, item,value);
     });
 
-    console.log(this.treedata);
+    console.info(this.treedata);
   }
 
   checkdata(obj,value) {
     if(obj.text !== value){
-      obj.visiable = false
+      obj.visiable = false;
     }
     if(obj.children) {
         for(let i of obj.children) {
@@ -96,14 +97,13 @@ export class HomeComponent {
   }
 
   checkdata1(obj,parentobj,value) {
-    
     if(obj.children) {
         for(let i of obj.children) {
             this.checkdata1(i, obj , value);
         }
     }else{
-      if(obj.visiable == true){
-        parentobj["visiable"] = true
+      if(obj.visiable === true){
+        parentobj["visiable"] = true;
       }
     }
   }
