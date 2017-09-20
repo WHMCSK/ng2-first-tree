@@ -1,1 +1,0 @@
-import { Ng2FirstTableModule, LocalDataSource } from 'ng2-first-table';
