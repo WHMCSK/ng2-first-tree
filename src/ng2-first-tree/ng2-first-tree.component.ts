@@ -166,16 +166,4 @@ export class Ng2FirstTreeComponent {
     }
   }
   // 全部显示隐藏方法---结束111
-
-  // 获取所有兄弟元素的方法
-  getSib(elm) {
-    const a = [];
-    const p = elm.parentNode.children;
-    for (let i = 0, pl = p.length; i < pl; i++) {
-      if (p[i] !== elm) {
-        a.push(p[i]);
-      }
-    }
-    return a;
-  }
 }
