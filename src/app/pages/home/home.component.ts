@@ -57,7 +57,6 @@ export class HomeComponent {
     showicon: `icon ion-filing`,
     hideicon: `icon ion-folder`,
     wenjicon: `icon ion-document-text`,
-    width:"200",
     filterstyle: `isshow`,//isshow|mark
     filtertype: `clientfilter`,//serverfilter|clientfilter
   };
