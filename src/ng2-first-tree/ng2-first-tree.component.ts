@@ -1,6 +1,5 @@
 import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
-import { HttpUrlEncodingCodec } from '@angular/common/http';
 
 @Component({
   selector: 'ng2-first-tree',

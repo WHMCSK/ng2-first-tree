@@ -1,23 +1,25 @@
 .tree-container{
     cursor:pointer;
     user-select: none;
-    border: 2px solid #ccc;
-    width: 300px;
     height: 100%;
     padding: 10px;
-    font-size: 16px;
+    min-width: 200px;
+    width: 100%;
     .row{
+        width: 100%;
         button{
             border: 1px solid #ccc;
             border-radius: 5px;
             padding:2px 7px;
             margin-bottom:10px;
+            
         } 
         input{
-            width:75%;
+            width:70%;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 4px 7px;
+                
         }      
     } 
     // 循环遍历
