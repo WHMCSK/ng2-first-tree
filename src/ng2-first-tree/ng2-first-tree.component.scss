@@ -1,25 +1,28 @@
+html,body{
+    font-size: 13px;
+}
 .tree-container{
     cursor:pointer;
-    user-select: none;
     height: 100%;
-    padding: 10px;
     min-width: 200px;
-    width: 100%;
-    .row{
+    width: 100% !important;
+    // padding: 10px;
+    font-size: 1rem;
+    // color: blue !important;
+    .tree-row{
+        font-size: 1rem;
         width: 100%;
         button{
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding:2px 7px;
+            padding:3px;
             margin-bottom:10px;
-            
         } 
         input{
             width:70%;
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 4px 7px;
-                
+            padding:5px 7px;           
         }      
     } 
     // 循环遍历
@@ -29,14 +32,15 @@
         width: 100%;
         height: 100%;
         li{
+            font-size: 1rem;
             list-style: none;
-            height: 30px;
-            line-height: 28px;
+            height:1.8rem;
+            line-height: 1.78rem;
         }
         li:hover{
         color:#00abff;
         cursor: pointer;
-        line-height: 30px;
+        line-height: 1.75rem;
        }
        &.selected{
         color: white;
@@ -49,8 +53,8 @@
     
     // 图表
     .fonticon{
-        font-size: 20px;
-        padding: 0 5px;
+        font-size: 1rem;
+        padding: 0 .35rem;
     }
     //右键弹出
     .contextmenu{
@@ -65,10 +69,11 @@
               margin: 0px;
               width:100%;
             .list-item{
+                font-size: .875rem;
                 border-bottom: 1px solid #ccc;
                 background: white;
                 min-width: 50px;
-                padding:0 10px 0 10px;
+                padding:0 .5rem;
                 &:hover{
                      background: #ccc;
                      color:black;
