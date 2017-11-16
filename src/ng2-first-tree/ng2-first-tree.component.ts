@@ -107,7 +107,7 @@ export class Ng2FirstTreeComponent {
   // 双击控制tree的展示隐藏
   onToggle(obj) {
     obj.co = !obj.co;
-    console.info(`双击`);
+    // console.info(`双击`);
   }
   // 菜单上的各种自定义事件   
   nodeMenuClick(item) {
