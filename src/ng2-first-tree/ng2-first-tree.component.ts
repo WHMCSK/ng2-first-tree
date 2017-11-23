@@ -28,6 +28,7 @@ export class Ng2FirstTreeComponent {
   // @Output() mouseEnter = new EventEmitter<any>();
   // @Output() toggleSubMenu = new EventEmitter<any>();
 
+
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
@@ -37,7 +38,9 @@ export class Ng2FirstTreeComponent {
       }
     };
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+   }
+
   // 清除同级类名
   clearFn() {
     const uls = this.elementRef.nativeElement.querySelectorAll(`.select ul`);
@@ -51,9 +54,14 @@ export class Ng2FirstTreeComponent {
   //   // console.info(e);
   //   this.mouseEnter.emit(a);
   // }
+  
 
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
+    // 1123
+    this.clearBgc();
+    obj.isSelect = true;
+
     this.clearFn();
     // e.target.localName 表示当前点击的元素
     // this.parentUl = 当前父元素UL
@@ -65,18 +73,18 @@ export class Ng2FirstTreeComponent {
     // 4 找到UL之后，给当前 .className = "div3 zidingyi";
     // 4.1 它的兄弟元素 .className = "div3";
     // console.info(e.target.parentNode);
-    if (e.target.localName === `li`) {
-      this.parentUl = e.target.parentNode;
-      this.parentUl.setAttribute('class', 'selected');
-    }
-    if (e.target.localName === `ul`) {
-      this.parentUl = e.target;
-      this.parentUl.setAttribute('class', 'selected');
-    }
-    if (e.target.localName === `span` || e.target.localName === `i`) {
-      this.parentUl = e.target.parentNode.parentNode;
-      this.parentUl.setAttribute('class', 'selected');
-    }
+    // if (e.target.localName === `li`) {
+    //   this.parentUl = e.target.parentNode;
+      // this.parentUl.setAttribute('class', 'selected');
+    // }
+    // if (e.target.localName === `ul`) {
+    //   this.parentUl = e.target;
+      // this.parentUl.setAttribute('class', 'selected');
+    // }
+    // if (e.target.localName === `span` || e.target.localName === `i`) {
+      // this.parentUl = e.target.parentNode.parentNode;
+      // this.parentUl.setAttribute('class', 'selected');
+    // }
     // 在菜单展开的时候，阻止单击事件
     if (this.menuShow === true) {
       this.menuShow = false;
@@ -107,7 +115,7 @@ export class Ng2FirstTreeComponent {
   // 双击控制tree的展示隐藏
   onToggle(obj) {
     obj.co = !obj.co;
-    console.info(`双击`);
+    // console.info(`双击`);
   }
   // 菜单上的各种自定义事件   
   nodeMenuClick(item) {
@@ -166,4 +174,16 @@ export class Ng2FirstTreeComponent {
     }
   }
   // 全部显示隐藏方法---结束111
+
+
+  // 清空所有点击样式
+  clearBgc(){
+    this.data.forEach( el => {
+      el.isSelect = false;
+      el.children.forEach( all => {
+        all.isSelect = false;
+      })
+    })
+
+  }
 }

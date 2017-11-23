@@ -7,7 +7,7 @@ const SIMPLE_TREE = [
         text: "学校",
         treeheight: 1,
         enableclick: true,
-        collapse: false,
+        collapse: true,
         visiable: true,
         children: [
             {
@@ -65,7 +65,7 @@ const SIMPLE_TREE = [
         text: "医院",
         treeheight: 1,
         enableclick: true,
-        collapse: true,
+        co: true,
         visiable: true,
         children: [
             {

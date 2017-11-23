@@ -108,4 +108,8 @@ export class HomeComponent {
     }
   }
 
+  ondel(){
+    
+  }
+
 }
