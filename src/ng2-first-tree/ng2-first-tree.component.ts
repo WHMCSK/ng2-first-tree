@@ -1,12 +1,31 @@
 import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 
+import { deepExtend } from './lib/helpers';
+
 @Component({
   selector: 'ng2-first-tree',
   styleUrls: ['./ng2-first-tree.component.scss'],
   templateUrl: './ng2-first-tree.component.html',
 })
 export class Ng2FirstTreeComponent {
+  // 1124更新
+
+  // 默认和取的数据的合并
+  newSettings: any;
+
+  // 发射展开折叠事件
+  @Output() allFolded = new EventEmitter<any>();
+  @Output() allExpansion = new EventEmitter<any>();
+
+
+
+
+  // 1124更新结束
+
+
+
+
   // 双击事件的控制
   temp: any;
   tempTime: any;
@@ -31,6 +50,26 @@ export class Ng2FirstTreeComponent {
   // 是否开启选中背景色
   selectBgc: any;
 
+  // 默认配置
+  defaultSettings = {
+    showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
+    hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
+    noChildicon: `icon ion-document-text`,   //  没有子节点时的图标， wenjicon：`icon ion-document-text`
+    filter: {                                //  搜索配置  暂时没有
+      type: '',                              //  客户端过滤|服务端过滤   serverfilter|clientfilter
+      class: '',                             //  搜索框的 类名
+      isShow: false,                         //  搜索框是否
+    },
+    selectBgc: {                             // 选中行背景色
+      open: false,                           // 默认关闭
+      bgc: '',                               // 配置背景色
+      lv1: false,                            // 第一级是否开启选中背景色 
+    },
+    foldedExpansionIsShow: false,           // 折叠展开是否显示
+
+  }
+
+
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
@@ -41,10 +80,19 @@ export class Ng2FirstTreeComponent {
     };
   }
   ngOnInit(): void {
-    this.selectBgc = this.settings.selectBgc ? this.settings.selectBgc : {open:false};
-   }
+    this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
 
-   
+  }
+
+  // 1124更新
+
+
+
+  // ngOnChange(){
+  //   console.log(1);
+
+
+  // }
 
   // 清除同级类名
   clearFn() {
@@ -59,16 +107,16 @@ export class Ng2FirstTreeComponent {
   //   // console.info(e);
   //   this.mouseEnter.emit(a);
   // }
-  
+
 
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
 
-    if(this.selectBgc.open){
+    if (this.selectBgc.open) {
       this.clearBgc();
       obj.isSelect = true;
     }
-  
+
 
     this.clearFn();
     // e.target.localName 表示当前点击的元素
@@ -83,15 +131,15 @@ export class Ng2FirstTreeComponent {
     // console.info(e.target.parentNode);
     // if (e.target.localName === `li`) {
     //   this.parentUl = e.target.parentNode;
-      // this.parentUl.setAttribute('class', 'selected');
+    // this.parentUl.setAttribute('class', 'selected');
     // }
     // if (e.target.localName === `ul`) {
     //   this.parentUl = e.target;
-      // this.parentUl.setAttribute('class', 'selected');
+    // this.parentUl.setAttribute('class', 'selected');
     // }
     // if (e.target.localName === `span` || e.target.localName === `i`) {
-      // this.parentUl = e.target.parentNode.parentNode;
-      // this.parentUl.setAttribute('class', 'selected');
+    // this.parentUl = e.target.parentNode.parentNode;
+    // this.parentUl.setAttribute('class', 'selected');
     // }
     // 在菜单展开的时候，阻止单击事件
     if (this.menuShow === true) {
@@ -142,7 +190,7 @@ export class Ng2FirstTreeComponent {
     // 获取点击div距离父节点的距离
     // 把当前点击点的坐标赋值给菜单div的top left
     this.top = htmlnode.offsetTop + 30;
-    this.left = 55; 
+    this.left = 55;
     // this.left = htmlnode.offsetLeft + 80;
     // 用margin值会影响右键
     // console.info(`${this.left}============ ${this.top}`);
@@ -153,44 +201,17 @@ export class Ng2FirstTreeComponent {
     obj.co = !obj.co;
     // event.stopPropagation(); 
   }
-  // 全部显示隐藏控制方法---开始
-  allShow() {
-    this.data.forEach(item => {
-      this.open(item);
-    });
-  }
-  open(obj) {
-    obj.co = true;
-    if (obj.children) {
-      for (let i of obj.children) {
-        this.open(i);
-      }
-    }
-  }
-  allHide() {
-    this.data.forEach(item => {
-      this.close(item);
-    });
-  }
-  close(obj) {
-    obj.co = false;
-    if (obj.children) {
-      for (let i of obj.children) {
-        this.close(i);
-      }
-    }
-  }
-  // 全部显示隐藏方法---结束111
+
 
   // 清空所有点击样式
-  clearBgc(){
-    this.data.forEach( item => {
+  clearBgc() {
+    this.data.forEach(item => {
 
       this.clear(item);
 
     })
   }
-  clear(obj){
+  clear(obj) {
     obj.isSelect = false;
     if (obj.children) {
       for (let i of obj.children) {
