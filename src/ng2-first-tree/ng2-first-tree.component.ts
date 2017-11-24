@@ -151,7 +151,7 @@ export class Ng2FirstTreeComponent {
   // 图标上的单击事件
   showTree(obj, event) {
     obj.co = !obj.co;
-    event.stopPropagation();
+    // event.stopPropagation(); 
   }
   // 全部显示隐藏控制方法---开始
   allShow() {
