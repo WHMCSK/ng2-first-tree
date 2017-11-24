@@ -59,6 +59,11 @@ export class HomeComponent {
     wenjicon: `icon ion-document-text`,
     filterstyle: `isshow`,//isshow|mark
     filtertype: `clientfilter`,//serverfilter|clientfilter
+    selectBgc: {            // 选中行背景色
+      open: true,           // 是否开启
+      bgc:'#00abff',        // 配置背景色
+      lv1: false,            // 第一级是否开启选中背景色 
+    },
   };
   
   constructor(private dp: SimpleTreeService){
@@ -70,7 +75,7 @@ export class HomeComponent {
   }
   onclick(obj){
     console.info(`node clicked`);
-    console.dir(obj);
+    console.log(obj);
   }
   search(value){
     console.info(`搜索值`, value);

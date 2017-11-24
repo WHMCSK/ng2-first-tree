@@ -28,6 +28,8 @@ export class Ng2FirstTreeComponent {
   // @Output() mouseEnter = new EventEmitter<any>();
   // @Output() toggleSubMenu = new EventEmitter<any>();
 
+  // 是否开启选中背景色
+  selectBgc: any;
 
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
@@ -39,7 +41,10 @@ export class Ng2FirstTreeComponent {
     };
   }
   ngOnInit(): void {
+    this.selectBgc = this.settings.selectBgc ? this.settings.selectBgc : {open:false};
    }
+
+   
 
   // 清除同级类名
   clearFn() {
@@ -58,9 +63,12 @@ export class Ng2FirstTreeComponent {
 
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
-    // 1123
-    this.clearBgc();
-    obj.isSelect = true;
+
+    if(this.selectBgc.open){
+      this.clearBgc();
+      obj.isSelect = true;
+    }
+  
 
     this.clearFn();
     // e.target.localName 表示当前点击的元素
@@ -143,7 +151,6 @@ export class Ng2FirstTreeComponent {
   // 图标上的单击事件
   showTree(obj, event) {
     obj.co = !obj.co;
-    console.info(obj.co);
     event.stopPropagation();
   }
   // 全部显示隐藏控制方法---开始
@@ -178,12 +185,18 @@ export class Ng2FirstTreeComponent {
 
   // 清空所有点击样式
   clearBgc(){
-    this.data.forEach( el => {
-      el.isSelect = false;
-      el.children.forEach( all => {
-        all.isSelect = false;
-      })
-    })
+    this.data.forEach( item => {
 
+      this.clear(item);
+
+    })
+  }
+  clear(obj){
+    obj.isSelect = false;
+    if (obj.children) {
+      for (let i of obj.children) {
+        this.clear(i);
+      }
+    }
   }
 }
