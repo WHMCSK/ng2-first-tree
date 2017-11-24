@@ -182,7 +182,6 @@ export class Ng2FirstTreeComponent {
   }
   // 全部显示隐藏方法---结束111
 
-
   // 清空所有点击样式
   clearBgc(){
     this.data.forEach( item => {
@@ -199,4 +198,5 @@ export class Ng2FirstTreeComponent {
       }
     }
   }
+
 }

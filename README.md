@@ -119,11 +119,19 @@ settings = {
             console.log("修改");
         }
     },],
-    nodeclick: function(){
-        console.log("单击事件的处理函数");
+    nodeclick: () => {
+
     },
-    showicon: "ion-arrow-down-b",
-    hideicon: "ion-arrow-right-b",
+    showicon: `icon ion-filing`,
+    hideicon: `icon ion-folder`,
+    wenjicon: `icon ion-document-text`,
+    filterstyle: `isshow`,//isshow|mark
+    filtertype: `clientfilter`,//serverfilter|clientfilter
+    selectBgc: {            // 选中行背景色   此项不填写，默认为open: false
+      open: true,           // 是否开启
+      bgc:'#00abff',        // 配置背景色
+      lv1: false,            // 第一级是否开启选中背景色 
+    },
 }
 ```
 
