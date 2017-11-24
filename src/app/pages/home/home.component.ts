@@ -54,11 +54,12 @@ export class HomeComponent {
   settings = {
     menu: this.MENU_DATA,
     nodeclick: this.onclick,
-    showicon: `icon ion-filing`,
-    hideicon: `icon ion-folder`,
-    wenjicon: `icon ion-document-text`,
-    filterstyle: `isshow`,//isshow|mark
-    filtertype: `clientfilter`,//serverfilter|clientfilter
+  
+    filter:{
+      isShow:true
+    },
+    foldedExpansionIsShow: true,
+
     selectBgc: {            // 选中行背景色
       open: true,           // 是否开启
       bgc:'#00abff',        // 配置背景色
@@ -117,4 +118,15 @@ export class HomeComponent {
     
   }
 
+
+  onFolded(e){
+    console.log(e);
+    console.log(`折叠`);
+    
+  }
+  
+  onExpansion(e){
+    console.log(e);
+    console.log(`展开`);
+  }
 }

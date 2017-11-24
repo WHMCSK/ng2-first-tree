@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Ng2FirstTreeComponent } from './ng2-first-tree.component';
 
+// tree 折叠展开组件
+import { FoldedExpansionComponent } from './components/foldedExpansion/foldedExpansion.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -12,6 +15,8 @@ import { Ng2FirstTreeComponent } from './ng2-first-tree.component';
   ],
   declarations: [
     Ng2FirstTreeComponent,
+    // tree 折叠展开组件
+    FoldedExpansionComponent,
   ],
   exports: [
     Ng2FirstTreeComponent,
