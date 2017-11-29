@@ -14,9 +14,11 @@ export class DocumentComponent {
   peizhiDatas: any;
 
   settings = {
-    menu: [],
-    nodeclick: () => { },
-
+    menuDatas: [
+      {title: 'add', text: '新增'},
+      {title: 'edit', text: '修改'},
+      {title: 'delete', text: '删除'},
+    ],
     filter: {
       isShow: false,
     },
@@ -38,5 +40,22 @@ export class DocumentComponent {
   ngOnInit(): void {
 
 
+  }
+
+  nodeClick(e){
+    console.log(e);
+    
+  }
+
+  nodeMenuClick(e){
+    
+    if(e.title == 'add'){
+      console.log(e.title,e.data);
+    }else if(e.title == 'delete'){
+      console.log(e.title,e.data);
+    }else{
+      console.log(e.title,e.data);
+    }
+    
   }
 }
