@@ -25,8 +25,8 @@
                     <li (click)='onNodeClicked($event,b)' (contextmenu)="rightClick(b, $event,div2)">
                         <i class="{{newSettings.hideicon}} fonticon" *ngIf="b.children&&!b.co" (click)="showTree(b,$event)"></i>
                         <i class="{{newSettings.showicon}} fonticon" *ngIf="b.children&&b.co" (click)="showTree(b,$event)"></i>
-                        <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!b.children&&b.co" (click)="showTree(b,$event)"></i>
-                        <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!b.children&&!b.co" (click)="showTree(b,$event)"></i>
+                        <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!b.children&&b.co" (click)="showTree(b,$event)"></i>
+                        <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!b.children&&!b.co" (click)="showTree(b,$event)"></i>
                         <span>{{b.text}}</span>
                     </li>
                 </ul>
@@ -37,8 +37,8 @@
                             <li (click)='onNodeClicked($event,c)' (contextmenu)="rightClick(c, $event,div3)">
                                 <i class="{{newSettings.hideicon}} fonticon" *ngIf="c.children&&!c.co" (click)="showTree(c,$event)"></i>
                                 <i class="{{newSettings.showicon}} fonticon" *ngIf="c.children&&c.co" (click)="showTree(c,$event)"></i>
-                                <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!c.children&&c.co" (click)="showTree(c,$event)"></i>
-                                <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!c.children&&!c.co" (click)="showTree(c,$event)"></i>
+                                <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!c.children&&c.co" (click)="showTree(c,$event)"></i>
+                                <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!c.children&&!c.co" (click)="showTree(c,$event)"></i>
                                 <span>{{c.text}}</span>
                             </li>
                         </ul>
@@ -49,8 +49,8 @@
                                     <li (click)='onNodeClicked($event,d)' (contextmenu)="rightClick(d, $event,div4)">
                                         <i class="{{newSettings.hideicon}} fonticon" *ngIf="d.children&&!d.co" (click)="showTree(d,$event)"></i>
                                         <i class="{{newSettings.showicon}} fonticon" *ngIf="d.children&&d.co" (click)="showTree(d,$event)"></i>
-                                        <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!d.children&&d.co" (click)="showTree(d,$event)"></i>
-                                        <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!d.children&&!d.co" (click)="showTree(d,$event)"></i>
+                                        <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!d.children&&d.co" (click)="showTree(d,$event)"></i>
+                                        <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!d.children&&!d.co" (click)="showTree(d,$event)"></i>
                                         <span>{{d.text}}</span>
                                     </li>
                                 </ul>
@@ -61,8 +61,8 @@
                                             <li (click)='onNodeClicked($event,e)' (contextmenu)="rightClick(e, $event,div5)">
                                                 <i class="{{newSettings.hideicon}} fonticon" *ngIf="e.children&&!e.co" (click)="showTree(e,$event)"></i>
                                                 <i class="{{newSettings.showicon}} fonticon" *ngIf="e.children&&e.co" (click)="showTree(e,$event)"></i>
-                                                <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!e.children&&e.co" (click)="showTree(e,$event)"></i>
-                                                <i class="{{newSettings.wenjicon}} fonticon" *ngIf="!e.children&&!e.co" (click)="showTree(e,$event)"></i>
+                                                <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!e.children&&e.co" (click)="showTree(e,$event)"></i>
+                                                <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!e.children&&!e.co" (click)="showTree(e,$event)"></i>
                                                 <span>{{e.text}}</span>
                                             </li>
                                         </ul>

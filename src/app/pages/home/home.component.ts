@@ -50,22 +50,8 @@ export class HomeComponent {
     treeheight: 2,
     
   };
-
-  settings = {
-    menu: this.MENU_DATA,
-    nodeclick: this.onclick,
+  settings;
   
-    filter:{
-      isShow:true
-    },
-    foldedExpansionIsShow: true,
-
-    selectBgc: {            // 选中行背景色
-      open: true,           // 是否开启
-      bgc:'#00abff',        // 配置背景色
-      lv1: false,            // 第一级是否开启选中背景色 
-    },
-  };
   
   constructor(private dp: SimpleTreeService){
       this.treedata = dp.getASimpleTree();
@@ -73,6 +59,21 @@ export class HomeComponent {
       dp.getTreeData().then((tree) => {
         this.treedata1 = tree;
       });
+      this.settings = {
+        menu: this.MENU_DATA,
+        nodeclick: this.onclick,
+      
+        filter:{
+          isShow:true
+        },
+        // foldedExpansionIsShow: true,
+    
+        selectBgc: {            // 选中行背景色
+          open: true,           // 是否开启
+          bgc:'#00abff',        // 配置背景色
+          lv1: false,            // 第一级是否开启选中背景色 
+        },
+      };
   }
   onclick(obj){
     console.info(`node clicked`);
