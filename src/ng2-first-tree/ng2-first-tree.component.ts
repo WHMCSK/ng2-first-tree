@@ -68,8 +68,7 @@ export class Ng2FirstTreeComponent {
     foldedExpansionIsShow: false,           // 折叠展开是否显示
 
   }
-
-
+  
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
@@ -79,9 +78,13 @@ export class Ng2FirstTreeComponent {
       }
     };
   }
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    console.log(this.settings);
+    
     this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
-
+    
+    console.log(this.newSettings);
+    
   }
 
   // 1124更新

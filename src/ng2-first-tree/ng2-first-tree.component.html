@@ -1,9 +1,4 @@
 <div class="tree-container">
-    <!-- <div class="search-wrapper"> -->
-    <!-- <div class="tree-row" *ngIf="newSettings.foldedExpansionIsShow">
-        <button class="btn btn-primary" (click)="allShow()">全部展开</button>
-        <button class="btn btn-primary" (click)="allHide()">全部收起</button>
-    </div> -->
     <!-- 折叠展开组件 -->
     <ng2-tree-foldedExpansion [newSettings]="newSettings" [data]="data" 
         (allFolded)="allFolded.emit($event)" (allExpansion)="allExpansion.emit($event)">
