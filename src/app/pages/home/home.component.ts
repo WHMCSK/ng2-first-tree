@@ -65,6 +65,7 @@ export class HomeComponent {
       bgc:'#00abff',        // 配置背景色
       lv1: false,            // 第一级是否开启选中背景色 
     },
+    
   };
   
   constructor(private dp: SimpleTreeService){
@@ -75,8 +76,8 @@ export class HomeComponent {
       });
   }
   onclick(obj){
-    console.info(`node clicked`);
-    console.log(obj);
+    // console.info(`node clicked`);
+    // console.log(obj);
   }
   search(value){
     console.info(`搜索值`, value);
