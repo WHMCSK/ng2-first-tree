@@ -6,6 +6,8 @@ import { Ng2FirstTreeComponent } from './ng2-first-tree.component';
 
 // tree 折叠展开组件
 import { FoldedExpansionComponent } from './components/foldedExpansion/foldedExpansion.component';
+// tree 搜索组件
+import { FilterComponent } from './components/fliter/filter.componet';
 
 @NgModule({
   imports: [
@@ -17,6 +19,8 @@ import { FoldedExpansionComponent } from './components/foldedExpansion/foldedExp
     Ng2FirstTreeComponent,
     // tree 折叠展开组件
     FoldedExpansionComponent,
+    // tree 搜索组件
+    FilterComponent,
   ],
   exports: [
     Ng2FirstTreeComponent,
