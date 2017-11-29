@@ -8,11 +8,15 @@ import { routes } from './document.routes';
 
 import { DocumentComponent } from './document.component';
 
+import { Ng2FirstTreeModule } from '../../../ng2-first-tree';
+
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
+    Ng2FirstTreeModule,
   ],
   declarations: [
     DocumentComponent,

@@ -13,45 +13,42 @@ export class Ng2FirstTreeComponent {
 
   // 默认和取的数据的合并
   newSettings: any;
+  // 子组件定义的值传个父组件。可以方在子组件的标签上用、
+  @Input() data: any;
+  @Input() settings: any;
 
   // 发射展开折叠事件
   @Output() allFolded = new EventEmitter<any>();
   @Output() allExpansion = new EventEmitter<any>();
   // 发射搜索事件
   @Output() searchEvent = new EventEmitter<any>();
+  // 发射节点点击事件 单击/双击/右键
+  @Output() nodeClick = new EventEmitter<any>();
+  @Output() nodeDblClick = new EventEmitter<any>();
+  @Output() nodeMenuClick = new EventEmitter<any>();
+  // 判断是不是单击
+  isClick: boolean;
 
 
+  /*
+    
+  ** 右键菜单部分
 
-  // 1124更新结束
-
-
-
-
-  // 双击事件的控制
-  temp: any;
-  tempTime: any;
-  timeout: any;
-  // 记录右键被选中的对象
-  clickedNode: any;
-  // 右键菜单的展示控制
+  */
+  // 右键菜单的显示隐藏
   menuShow: boolean = false;
   // 右键菜单的定位位置
   top: any;
   left: any;
-  
-  parentUl: any;
-  // 子组件定义的值传个父组件。可以方在子组件的标签上用、
-  @Input() data: any;
-  @Input() settings: any;
-  // 子传父，点击者。
-  // @Output() mouseEnter = new EventEmitter<any>();
-  // @Output() toggleSubMenu = new EventEmitter<any>();
+  // 右键的节点数据
+  tempMenuData: any;
 
-  // 是否开启选中背景色
-  selectBgc: any;
+  // 1124更新结束
+
 
   // 默认配置
   defaultSettings = {
+    menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
     hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
     noChildicon: `icon ion-document-text`,   //  没有子节点时的图标， wenjicon：`icon ion-document-text`
@@ -69,7 +66,6 @@ export class Ng2FirstTreeComponent {
 
   }
 
-
   constructor(private elementRef: ElementRef) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
@@ -81,7 +77,6 @@ export class Ng2FirstTreeComponent {
   }
   ngOnInit(): void {
     this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
-
   }
 
   // 1124更新
@@ -95,12 +90,12 @@ export class Ng2FirstTreeComponent {
   // }
 
   // 清除同级类名
-  clearFn() {
-    const uls = this.elementRef.nativeElement.querySelectorAll(`.select ul`);
-    uls.forEach(ele => {
-      ele.setAttribute('class', 'a');
-    });
-  }
+  // clearFn() {
+  //   const uls = this.elementRef.nativeElement.querySelectorAll(`.select ul`);
+  //   uls.forEach(ele => {
+  //     ele.setAttribute('class', 'a');
+  //   });
+  // }
   // 鼠标进入
   // onMouseEnter(e, a) {
   //   // console.info(a);
@@ -111,14 +106,26 @@ export class Ng2FirstTreeComponent {
 
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
+    this.isClick = false;
+    setTimeout(() => {
+      if (this.isClick) {
+        return;
+      }
+      if (this.newSettings.selectBgc.open) {
+        this.clearBgc();
+        obj.isSelect = true;
+      }
 
-    if (this.selectBgc.open) {
-      this.clearBgc();
-      obj.isSelect = true;
-    }
+      this.nodeClick.emit(obj);
 
+      // 在菜单展开的时候，阻止单击事件
+      if (this.menuShow === true) {
+        this.menuShow = false;
+        e.stopPropagation();
+        return;
+      }
+    }, 300);
 
-    this.clearFn();
     // e.target.localName 表示当前点击的元素
     // this.parentUl = 当前父元素UL
     // 1 如果点击的是 i 或者 span 时候，他的父元素一定是 li
@@ -141,74 +148,86 @@ export class Ng2FirstTreeComponent {
     // this.parentUl = e.target.parentNode.parentNode;
     // this.parentUl.setAttribute('class', 'selected');
     // }
-    // 在菜单展开的时候，阻止单击事件
-    if (this.menuShow === true) {
-      this.menuShow = false;
-      event.stopPropagation();
-      return;
-    }
-    clearTimeout(this.timeout);
-    if (!this.temp) {
-      this.temp = new Date();
-    } else {
-      this.tempTime = this.temp;
-      this.temp = new Date();
-    }
-    // 单击事件倒计时
-    this.timeout = setTimeout(() => {
-      this.settings.nodeclick(obj);
-      // console.info(`单击`);
-    }, 300);
 
-    // 两次点击时间差
-    const clickBuffer = this.temp - this.tempTime;
-    // 如果双击 立即执行双击函数 并且清除单击事件倒计时
-    if (clickBuffer && clickBuffer < 300) {
-      this.onToggle(obj);
-      clearTimeout(this.timeout);
-    }
+
+    // // 单击事件倒计时
+    // this.timeout = setTimeout(() => {
+    //   this.settings.nodeclick(obj);
+    //   // console.info(`单击`);
+    // }, 300);
+
+    // // 两次点击时间差
+    // const clickBuffer = this.temp - this.tempTime;
+    // // 如果双击 立即执行双击函数 并且清除单击事件倒计时
+    // if (clickBuffer && clickBuffer < 300) {
+    //   this.onToggle(obj);
+    //   clearTimeout(this.timeout);
+    // }
+
+
   }
+
+
   // 双击控制tree的展示隐藏
-  onToggle(obj) {
+  onNodeDblClicked(e, obj) {
+    this.isClick = true;
     obj.co = !obj.co;
-    // console.info(`双击`);
+
+    this.nodeDblClick.emit(obj);
   }
   // 菜单上的各种自定义事件   
-  nodeMenuClick(item) {
-    item.clickFn(this.clickedNode);
+  nodeMenuClickFn(item) {
+    // item.clickFn(this.clickedNode);
+    // console.log(item);
+    this.nodeMenuClick.emit({
+      title: item,
+      data: this.tempMenuData,
+    });
     this.menuShow = !this.menuShow;
   }
 
   // 右键点击事件
   rightClick(obj, event, htmlnode) {
-    // 添加背景色
-    this.onNodeClicked(event, obj);
+    // 1. 阻止右键默认事件
+    // 2. 显示右键菜单
+    // 3. 设置菜单显示的位置
+    // 4. 保存当前点击的数据
+    // 5. 给当前点击的数据添加背景色
     event.preventDefault();
     this.menuShow = !this.menuShow;
-    // 把被点击的对象存储
-    this.clickedNode = obj;
-    // 获取点击div距离父节点的距离
-    // 把当前点击点的坐标赋值给菜单div的top left
     this.top = htmlnode.offsetTop + 30;
     this.left = 55;
+    this.left = htmlnode.offsetLeft + 80;
+    // 把被点击的对象存储
+    this.tempMenuData = obj;
+
+    this.clearBgc();
+    obj.isSelect = true;
+
+    // 添加背景色
+    // this.onNodeClicked(event, obj);
+    // 
+    // this.menuShow = !this.menuShow;
+
+    // 获取点击div距离父节点的距离
+    // 把当前点击点的坐标赋值给菜单div的top left
+    // this.top = htmlnode.offsetTop + 30;
+    // this.left = 55;
     // this.left = htmlnode.offsetLeft + 80;
     // 用margin值会影响右键
     // console.info(`${this.left}============ ${this.top}`);
-    console.info(obj, `点击了右键`);
+    // console.info(obj, `点击了右键`);
   }
   // 图标上的单击事件
   showTree(obj, event) {
     obj.co = !obj.co;
-    // event.stopPropagation(); 
   }
 
 
   // 清空所有点击样式
   clearBgc() {
     this.data.forEach(item => {
-
       this.clear(item);
-
     })
   }
   clear(obj) {

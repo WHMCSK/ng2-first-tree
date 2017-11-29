@@ -18,30 +18,7 @@ export class HomeComponent {
       console.log(this.dp);
 }
 
-  // 右键菜单的数据
-  MENU_DATA = 
-  [{
-    text:"添加兄弟节点",
-    clickFn: this.addBroFn,
-  },{
-    text:"添加子节点",
-    clickFn:function(nodeobj){
-      console.log(nodeobj);
-        console.log("添加子节点");     
-    }
-  },{
-    text:"删除",
-    clickFn:function(nodeobj){
-      console.log(nodeobj);
-        console.log("删除");
-    }
-  },{
-    text:"修改",
-    clickFn:function(nodeobj){
-      console.log(nodeobj);
-        console.log("修改");
-    }
-  },];
+  
   // 新添加进来的一组数据
   NEW_DATA = {
     id: 10,
@@ -50,8 +27,26 @@ export class HomeComponent {
     treeheight: 2,
     
   };
-  settings;
+  settings = {
+    menuDatas: [
+      {title: 'add', text: '新增'},
+      {title: 'edit', text: '修改'},
+      {title: 'delete', text: '删除'},
+    ],
+    nodeclick: this.onclick,
   
+    filter:{
+      isShow:true
+    },
+    // foldedExpansionIsShow: true,
+
+    selectBgc: {            // 选中行背景色
+      open: true,           // 是否开启
+      bgc:'#00abff',        // 配置背景色
+      lv1: false,            // 第一级是否开启选中背景色 
+    },
+  };
+ 
   
   constructor(private dp: SimpleTreeService){
       this.treedata = dp.getASimpleTree();
@@ -59,25 +54,11 @@ export class HomeComponent {
       dp.getTreeData().then((tree) => {
         this.treedata1 = tree;
       });
-      this.settings = {
-        menu: this.MENU_DATA,
-        nodeclick: this.onclick,
       
-        filter:{
-          isShow:true
-        },
-        // foldedExpansionIsShow: true,
-    
-        selectBgc: {            // 选中行背景色
-          open: true,           // 是否开启
-          bgc:'#00abff',        // 配置背景色
-          lv1: false,            // 第一级是否开启选中背景色 
-        },
-      };
   }
   onclick(obj){
-    console.info(`node clicked`);
-    console.log(obj);
+    // console.info(`node clicked`);
+    // console.log(obj);
   }
   search(value){
     console.info(`搜索值`, value);

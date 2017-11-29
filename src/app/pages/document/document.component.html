@@ -1,4 +1,8 @@
 <header-component tagline="文档"></header-component>
+<div style="width:500px">
+    <ng2-first-tree [data]='treedata' [settings]='settings' (nodeClick)="nodeClick($event)" (nodeMenuClick)="nodeMenuClick($event)"></ng2-first-tree>
+    
+</div>
 
 <section class="main-content">
     <h3><a id="inputs" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>组件输入</h3>
@@ -33,17 +37,13 @@
         </thead>
         <tbody>
             <tr>
-                <td>menu</td>
+                <td>menuDatas</td>
                 <td>数组</td>
-                <td>没有默认，必填</td>
-                <td>右键菜单的数据结构，menu:[{{left}} text:"添加兄弟节点", clickFn: ()=>{{left}}{{right}} {{right}}]
-                </td>
-            </tr>
-            <tr>
-                <td>nodeclick</td>
-                <td>function</td>
-                <td>没有默认，必填</td>
-                <td>节点上的点击事件， nodeclick: ()=>{{left}}{{right}}
+                <td>空数组</td>
+                <td>右键菜单的数据结构，menuDatas: [
+                    {{left}}title: 'add', text: '新增'{{right}},
+                    {{left}}title: 'edit', text: '修改'{{right}},
+                  ],
                 </td>
             </tr>
             <tr>
@@ -124,4 +124,43 @@
             </tr>
         </tbody>
     </table>
+    <h3><a id="inputs" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>组件输出事件</h3>
+    
+        <table>
+            <tr>
+                <th>事件名</th>
+                <th>Type</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>nodeClick</td>
+                <td><span class="highlight">function</span></td>
+                <td>节点单击事件，返回值：当前点击的节点数据</td>
+            </tr>
+            <tr>
+                <td>nodeDblClick</td>
+                <td><span class="highlight">function</span></td>
+                <td>节点双击事件，返回值：当前点击的节点数据</td>
+            </tr>
+            <tr>
+                <td>nodeMenuClick</td>
+                <td><span class="highlight">function</span></td>
+                <td>右键菜单上的单击事件，返回值：右键点击的节点数据，菜单的title</td>
+            </tr>
+            <tr>
+                <td>searchEvent</td>
+                <td><span class="highlight">function</span></td>
+                <td>搜索按钮单击事件，返回值：搜索框内的值</td>
+            </tr>
+            <tr>
+                <td>allFolded</td>
+                <td><span class="highlight">function</span></td>
+                <td>全部折叠事件，返回值：tree所有的数据</td>
+            </tr>
+            <tr>
+                <td>allExpansion</td>
+                <td><span class="highlight">function</span></td>
+                <td>全部展开事件，返回值：tree所有的数据</td>
+            </tr>
+        </table>
 </section>
