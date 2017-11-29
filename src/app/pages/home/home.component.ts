@@ -120,13 +120,17 @@ export class HomeComponent {
 
 
   onFolded(e){
-    console.log(e);
-    console.log(`折叠`);
+   
     
   }
   
   onExpansion(e){
-    console.log(e);
-    console.log(`展开`);
+  
   }
+
+  onsearch(e){
+    console.log(e);
+    
+  }
+
 }

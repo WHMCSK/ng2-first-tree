@@ -17,7 +17,8 @@ export class Ng2FirstTreeComponent {
   // 发射展开折叠事件
   @Output() allFolded = new EventEmitter<any>();
   @Output() allExpansion = new EventEmitter<any>();
-
+  // 发射搜索事件
+  @Output() searchEvent = new EventEmitter<any>();
 
 
 
@@ -37,8 +38,7 @@ export class Ng2FirstTreeComponent {
   // 右键菜单的定位位置
   top: any;
   left: any;
-  // 搜索框的值
-  searchValue: any;
+  
   parentUl: any;
   // 子组件定义的值传个父组件。可以方在子组件的标签上用、
   @Input() data: any;

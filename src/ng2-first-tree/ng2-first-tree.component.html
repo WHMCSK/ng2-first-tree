@@ -1,18 +1,10 @@
 <div class="tree-container">
-    <!-- <div class="search-wrapper"> -->
-    <!-- <div class="tree-row" *ngIf="newSettings.foldedExpansionIsShow">
-        <button class="btn btn-primary" (click)="allShow()">全部展开</button>
-        <button class="btn btn-primary" (click)="allHide()">全部收起</button>
-    </div> -->
+    
     <!-- 折叠展开组件 -->
-    <ng2-tree-foldedExpansion [newSettings]="newSettings" [data]="data" 
-        (allFolded)="allFolded.emit($event)" (allExpansion)="allExpansion.emit($event)">
+    <ng2-tree-foldedExpansion [newSettings]="newSettings" [data]="data" (allFolded)="allFolded.emit($event)" (allExpansion)="allExpansion.emit($event)">
     </ng2-tree-foldedExpansion>
-
-    <div class="tree-row " *ngIf="newSettings.filter.isShow">
-        <input type="search" placeholder="搜索" name="searchValue" [(ngModel)]="searchValue">
-        <button class="btn btn-primary">搜索</button>
-    </div>
+    <!-- 搜索组件 -->
+    <ng2-tree-filter [newSettings]="newSettings" [data]="data" (searchEvent)="searchEvent.emit($event)"></ng2-tree-filter>
     <!-- <P [ngClass]="{'selected':true}">水电费大幅度</P> [ngClass]="{'selected': a.selected}"-->
     <div *ngFor='let a of data' class='select' #box>
         <!--一级-->
