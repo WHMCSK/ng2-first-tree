@@ -220,6 +220,7 @@ export class Ng2FirstTreeComponent {
   }
   // 图标上的单击事件
   showTree(obj, event) {
+    event.stopPropagation();
     obj.co = !obj.co;
   }
 
