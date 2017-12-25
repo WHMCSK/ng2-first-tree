@@ -18,6 +18,7 @@ html,body{
             border-radius: 5px;
             padding:2px 8px;       
             background: #00abff;
+            margin: 0;
         } 
         input{
             width:70%;
@@ -38,18 +39,13 @@ html,body{
             height:1.8rem;
             line-height: 1.78rem;
         }
-        li:hover{
-        color:#00abff;
-        cursor: pointer;
-        line-height: 1.75rem;
-       }
-       &.selected{
-        color: white;
-        background: #00abff;
-        li:hover{
-           color: white; 
+        .hover:hover{
+            color:#00abff;
+            // background: #00abff;
+            cursor: pointer;
+            line-height: 1.75rem;
         }
-       }
+
     }
     
     // 图表

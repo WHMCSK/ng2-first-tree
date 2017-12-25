@@ -202,7 +202,7 @@ export class Ng2FirstTreeComponent {
     this.tempMenuData = obj;
 
     this.clearBgc();
-    obj.isSelect = true;
+    obj.isSelect = true; 
 
     // 添加背景色
     // this.onNodeClicked(event, obj);
@@ -220,6 +220,7 @@ export class Ng2FirstTreeComponent {
   }
   // 图标上的单击事件
   showTree(obj, event) {
+    event.stopPropagation();
     obj.co = !obj.co;
   }
 
