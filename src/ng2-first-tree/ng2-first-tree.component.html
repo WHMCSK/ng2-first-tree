@@ -10,7 +10,7 @@
         <div #div1>
             <ul [style.background]="newSettings.selectBgc.lv1 ? a.isSelect ? newSettings.selectBgc.bgc: '': ''">
                 <!--图标  -->
-                <li (click)='onNodeClicked($event,a)' (contextmenu)="rightClick(a, $event,div1)" (dblclick)="onNodeDblClicked($event,a)">
+                <li (click)='onNodeClicked($event,a)' (contextmenu)="rightClick(a, $event,div1)" (dblclick)="onNodeDblClicked($event,a)" [class.hover]="!a.isSelect">
                     <i class="{{newSettings.hideicon}} fonticon" *ngIf="a.children&&!a.co" (click)="showTree(a,$event)"></i>
                     <i class="{{newSettings.showicon}} fonticon" *ngIf="a.children&&a.co" (click)="showTree(a,$event)"></i>
                     <span>{{a.text}}</span>
@@ -21,7 +21,7 @@
         <ng-container *ngIf='a.co'>
             <ng-container *ngFor='let b of a.children'>
                 <ul #div2 [style.padding-left.%]="b.treeheight == 2 ? 7 : 0" [style.background]="b.isSelect ? newSettings.selectBgc.bgc: ''">
-                    <li (click)='onNodeClicked($event,b)' (contextmenu)="rightClick(b, $event,div2)" (dblclick)="onNodeDblClicked($event,b)">
+                    <li (click)='onNodeClicked($event,b)' (contextmenu)="rightClick(b, $event,div2)" (dblclick)="onNodeDblClicked($event,b)" [class.hover]="!b.isSelect">
                         <i class="{{newSettings.hideicon}} fonticon" *ngIf="b.children&&!b.co" (click)="showTree(b,$event)"></i>
                         <i class="{{newSettings.showicon}} fonticon" *ngIf="b.children&&b.co" (click)="showTree(b,$event)"></i>
                         <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!b.children&&b.co" (click)="showTree(b,$event)"></i>
@@ -33,7 +33,7 @@
                 <ng-container *ngIf='b.co'>
                     <ng-container *ngFor='let c of b.children'>
                         <ul #div3 [style.padding-left.%]="c.treeheight == 3 ? 14 : 0" [style.background]="c.isSelect ? newSettings.selectBgc.bgc: ''">
-                            <li (click)='onNodeClicked($event,c)' (contextmenu)="rightClick(c, $event,div3)" (dblclick)="onNodeDblClicked($event,c)">
+                            <li (click)='onNodeClicked($event,c)' (contextmenu)="rightClick(c, $event,div3)" (dblclick)="onNodeDblClicked($event,c)" [class.hover]="!c.isSelect">
                                 <i class="{{newSettings.hideicon}} fonticon" *ngIf="c.children&&!c.co" (click)="showTree(c,$event)"></i>
                                 <i class="{{newSettings.showicon}} fonticon" *ngIf="c.children&&c.co" (click)="showTree(c,$event)"></i>
                                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!c.children&&c.co" (click)="showTree(c,$event)"></i>
@@ -45,7 +45,7 @@
                         <ng-container *ngIf='c.co'>
                             <ng-container *ngFor='let d of c.children'>
                                 <ul #div4 [style.padding-left.%]="d.treeheight == 4 ? 21 : 0" [style.background]="d.isSelect ? newSettings.selectBgc.bgc: ''">
-                                    <li (click)='onNodeClicked($event,d)' (contextmenu)="rightClick(d, $event,div4)" (dblclick)="onNodeDblClicked($event,d)">
+                                    <li (click)='onNodeClicked($event,d)' (contextmenu)="rightClick(d, $event,div4)" (dblclick)="onNodeDblClicked($event,d)" [class.hover]="!d.isSelect">
                                         <i class="{{newSettings.hideicon}} fonticon" *ngIf="d.children&&!d.co" (click)="showTree(d,$event)"></i>
                                         <i class="{{newSettings.showicon}} fonticon" *ngIf="d.children&&d.co" (click)="showTree(d,$event)"></i>
                                         <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!d.children&&d.co" (click)="showTree(d,$event)"></i>
@@ -57,7 +57,7 @@
                                 <ng-container *ngIf='d.co'>
                                     <ng-container *ngFor='let e of d.children'>
                                         <ul #div5 [style.padding-left.%]="e.treeheight == 5 ? 28 : 0" [style.background]="e.isSelect ? newSettings.selectBgc.bgc: ''">
-                                            <li (click)='onNodeClicked($event,e)' (contextmenu)="rightClick(e, $event,div5)" (dblclick)="onNodeDblClicked($event,e)">
+                                            <li (click)='onNodeClicked($event,e)' (contextmenu)="rightClick(e, $event,div5)" (dblclick)="onNodeDblClicked($event,e)" [class.hover]="!e.isSelect">
                                                 <i class="{{newSettings.hideicon}} fonticon" *ngIf="e.children&&!e.co" (click)="showTree(e,$event)"></i>
                                                 <i class="{{newSettings.showicon}} fonticon" *ngIf="e.children&&e.co" (click)="showTree(e,$event)"></i>
                                                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!e.children&&e.co" (click)="showTree(e,$event)"></i>
