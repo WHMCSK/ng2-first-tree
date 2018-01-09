@@ -13,6 +13,8 @@
                 <li (click)='onNodeClicked($event,a)' (contextmenu)="rightClick(a, $event,div1)" (dblclick)="onNodeDblClicked($event,a)" [class.hover]="!a.isSelect">
                     <i class="{{newSettings.hideicon}} fonticon" *ngIf="a.children&&!a.co" (click)="showTree(a,$event)"></i>
                     <i class="{{newSettings.showicon}} fonticon" *ngIf="a.children&&a.co" (click)="showTree(a,$event)"></i>
+                    <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!a.children&&a.co" (click)="showTree(a,$event)"></i>
+                    <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!a.children&&!a.co" (click)="showTree(a,$event)"></i>
                     <span>{{a.text}}</span>
                 </li>
             </ul>
