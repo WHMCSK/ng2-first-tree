@@ -1,6 +1,6 @@
 {
     "name": "ng2-first-tree",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "description": "this is a angular2 tree ui",
     "main": "./bundles/table.umd.js",
     "module": "./index.js",
