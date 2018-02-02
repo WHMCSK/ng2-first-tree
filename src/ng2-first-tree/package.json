@@ -1,11 +1,11 @@
 {
     "name": "ng2-first-tree",
-    "version": "2.0.5",
+    "version": "2.0.7",
     "description": "this is a angular2 tree ui",
     "main": "./bundles/table.umd.js",
     "module": "./index.js",
     "typings": "./index.d.ts",
-    "author": "金飞,王博,张凌燕",
+    "author": "金飞,王博,张凌燕,赵华军",
     "license": "MIT",
     "scripts": {},
     "repository": {
