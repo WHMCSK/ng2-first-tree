@@ -28,6 +28,7 @@ export class HomeComponent {
     
   };
   settings = {
+    displayLength:3,
     menuDatas: [
       {title: 'add', text: '新增'},
       {title: 'edit', text: '修改'},

@@ -6,7 +6,7 @@
                 <i class="{{newSettings.showicon}} fonticon" *ngIf="node.children&&node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!node.children&&node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!node.children&&!node.co" (click)="showTree(node,$event)"></i>
-                <span>{{node.text}}</span>
+                <span [title]="node.text">{{ node.text.length>newSettings.displayLength?node.text.substring(0,newSettings.displayLength-1)+"...":node.text }}</span>
             </li>
         </ul>
     </div>

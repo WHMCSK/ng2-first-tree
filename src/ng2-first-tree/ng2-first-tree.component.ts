@@ -48,6 +48,7 @@ export class Ng2FirstTreeComponent {
 
   // 默认配置
   defaultSettings = {
+    displayLength:10,
     menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
     hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
