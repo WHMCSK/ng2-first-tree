@@ -12,6 +12,7 @@ import { Ng2FirstTreeComponent } from '../../ng2-first-tree.component'
 export class TreeNodeComponent {
     newSettings:any;
     @Input() treeData: any;
+
     constructor(private elementRef: ElementRef,
         private tree:Ng2FirstTreeComponent) {
     }
@@ -34,5 +35,18 @@ export class TreeNodeComponent {
     rightClick(obj, event, htmlnode) {
         console.log(this.tree.menuShow);
         this.tree.rightClick(obj,event,htmlnode);
+    }
+    getTitle(obj){
+        return obj[this.newSettings.displayName];
+    }
+    getText(obj){
+        if(obj[this.newSettings.displayName].length>this.newSettings.displayLength)
+        {
+            return obj[this.newSettings.displayName].substring(0,this.newSettings.displayLength-1)+"...";
+        }
+        else
+        {
+            return obj[this.newSettings.displayName];
+        }
     }
 }
