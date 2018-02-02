@@ -33,6 +33,36 @@ const SIMPLE_TREE = [
                                 enableclick: true,
                                 collapse: false,
                                 visiable: true,
+                                children:[
+                                    {
+                                        id : 6,
+                                        text:"一班深度5",
+                                        treeheight:5,
+                                        enableclick: true,
+                                        collapse: false,
+                                        visiable: true,
+                                        children:[
+                                            {
+                                                id : 6,
+                                                text:"一班深度6",
+                                                treeheight:6,
+                                                enableclick: true,
+                                                collapse: false,
+                                                visiable: true,
+                                                children:[
+                                                    {
+                                                        id : 6,
+                                                        text:"一班太深度了",
+                                                        treeheight:7,
+                                                        enableclick: true,
+                                                        collapse: false,
+                                                        visiable: true,
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
                         ]
                     }, {

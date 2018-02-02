@@ -194,7 +194,16 @@ export class Ng2FirstTreeComponent {
     // 4. 保存当前点击的数据
     // 5. 给当前点击的数据添加背景色
     event.preventDefault();
-    this.menuShow = !this.menuShow;
+    if(this.tempMenuData==null
+      ||(this.tempMenuData.treeheight==obj.treeheight
+      &&this.tempMenuData.text==obj.text))
+      {
+        this.menuShow = !this.menuShow;
+      }
+      else
+      {
+        this.menuShow=true;
+      }
     this.top = htmlnode.offsetTop + 30;
     this.left = 55;
     this.left = htmlnode.offsetLeft + 80;

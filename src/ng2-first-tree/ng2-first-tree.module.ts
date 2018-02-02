@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Ng2FirstTreeComponent } from './ng2-first-tree.component';
+import { TreeNodeComponent } from './components/node/node.component';
 
 // tree 折叠展开组件
 import { FoldedExpansionComponent } from './components/foldedExpansion/foldedExpansion.component';
@@ -17,6 +18,7 @@ import { FilterComponent } from './components/fliter/filter.componet';
   ],
   declarations: [
     Ng2FirstTreeComponent,
+    TreeNodeComponent,
     // tree 折叠展开组件
     FoldedExpansionComponent,
     // tree 搜索组件
@@ -24,6 +26,7 @@ import { FilterComponent } from './components/fliter/filter.componet';
   ],
   exports: [
     Ng2FirstTreeComponent,
+    TreeNodeComponent
   ],
 })
 export class Ng2FirstTreeModule {
