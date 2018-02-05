@@ -1,11 +1,13 @@
-<div class="tree-container">
+<div [class]="newSettings.treeClass">
     <!-- 折叠展开组件 -->
     <ng2-tree-foldedExpansion [newSettings]="newSettings" [data]="data" (allFolded)="allFolded.emit($event)" (allExpansion)="allExpansion.emit($event)">
     </ng2-tree-foldedExpansion>
     <!-- 搜索组件 -->
-    <ng2-tree-filter [newSettings]="newSettings" [data]="data" (searchEvent)="searchEvent.emit($event)"></ng2-tree-filter>
+    <ng2-tree-filter [newSettings]="newSettings" [data]="data" (searchEvent)="search($event)"></ng2-tree-filter>
     <!-- <P [ngClass]="{'selected':true}">水电费大幅度</P> [ngClass]="{'selected': a.selected}"-->
-    <div #box>
+    <div #box 
+    [style.height.px]="newSettings.displayNode*newSettings.nodeHeight" 
+    [style.overflow-y]="newSettings.yScroll">
       <tree-node [treeData]="data"></tree-node>
     </div>
     <!--右键的弹出框 menuShow:是否右键功能-->

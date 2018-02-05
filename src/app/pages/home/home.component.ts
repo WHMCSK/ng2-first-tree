@@ -112,7 +112,6 @@ export class HomeComponent {
   }
 
   onsearch(e){
-    console.log(e);
     
   }
 

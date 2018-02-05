@@ -2,6 +2,16 @@
 html,body{
     font-size: 13px;
 }
+:host /deep/ .scrollColor{
+    Scrollbar-Face-Color:red; //为滚动条表面颜色设定；(立体滚动条凸出部分的颜色)
+    Scrollbar-Highlight-Color: red; //为滚动条上斜面和左斜面颜色设定；(立体滚动条空白部分的颜色)
+    Scrollbar-Shadow-Color:red; //为滚动条下斜面和右斜面颜色设定；(立体滚动条阴影的颜色)
+    Scrollbar-3Dlight-Color:red; //为滚动条上边和左边的边沿颜色设定；（立体滚动条亮边的颜色）
+    Scrollbar-Arrow-Color:red; //为滚动条两端三角箭头颜色设定。
+    Scrollbar-Track-Color:red; //为滚动条底板颜色设定；
+    Scrollbar-Darkshadow-Color:red; //为滚动条下边和右边边沿颜色设定。(立体滚动条强阴影的颜色)
+    scrollbar-base-color:red; //滚动条的基本颜色
+}
 :host /deep/ .tree-container{
     user-select: none;
     cursor:pointer;

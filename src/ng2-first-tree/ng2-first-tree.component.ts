@@ -48,8 +48,12 @@ export class Ng2FirstTreeComponent {
 
   // 默认配置
   defaultSettings = {
-    displayLength:10,
-    displayName:"text",
+    displayLength:10,                        //  节点文本显示长度
+    displayName:"text",                      //  节点显示字段
+    displayNode:5,                           //  显示多少个节点
+    nodeHeight:30,                           //  每个节点高度
+    yScroll:"auto",                          //  垂直滚动条显示样式
+    treeClass:"tree-container",              //  树样式
     menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
     hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
@@ -79,6 +83,7 @@ export class Ng2FirstTreeComponent {
   }
   ngOnInit(): void {
     this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
+    this.showNode("");
   }
 
   // 1124更新
@@ -235,7 +240,6 @@ export class Ng2FirstTreeComponent {
     obj.co = !obj.co;
   }
 
-
   // 清空所有点击样式
   clearBgc() {
     this.data.forEach(item => {
@@ -251,4 +255,35 @@ export class Ng2FirstTreeComponent {
     }
   }
 
+  search(obj){
+    this.showNode(obj);
+    this.searchEvent.emit(obj);
+  }
+  showNode(searchObj){
+    this.data.forEach(item=>{
+      this.showNodeRecursive(item,searchObj);
+    });
+  }
+  showNodeRecursive(obj,searchObj){
+    if(searchObj==""||obj.text.indexOf(searchObj)==0){
+      obj.IsShow=true;
+      if(obj.parent){
+        this.showParentNode(obj.parent);
+      }
+    }else{
+      obj.IsShow=false;
+    }
+    if (obj.children) {
+      for (let i of obj.children) {
+        i.parent=obj;
+        this.showNodeRecursive(i,searchObj);
+      }
+    }
+  }
+  showParentNode(obj){
+    obj.IsShow=true;
+    if(obj.parent){
+      this.showParentNode(obj.parent);
+    }
+  }
 }
