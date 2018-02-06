@@ -86,30 +86,6 @@ export class Ng2FirstTreeComponent {
     this.showNode("");
   }
 
-  // 1124更新
-
-
-
-  // ngOnChange(){
-  //   console.log(1);
-
-
-  // }
-
-  // 清除同级类名
-  // clearFn() {
-  //   const uls = this.elementRef.nativeElement.querySelectorAll(`.select ul`);
-  //   uls.forEach(ele => {
-  //     ele.setAttribute('class', 'a');
-  //   });
-  // }
-  // 鼠标进入
-  // onMouseEnter(e, a) {
-  //   // console.info(a);
-  //   // console.info(e);
-  //   this.mouseEnter.emit(a);
-  // }
-
 
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
@@ -132,30 +108,6 @@ export class Ng2FirstTreeComponent {
         return;
       }
     }, 300);
-
-    // e.target.localName 表示当前点击的元素
-    // this.parentUl = 当前父元素UL
-    // 1 如果点击的是 i 或者 span 时候，他的父元素一定是 li
-    // 1.1 如果他的父元素是li 的时候，那么找li 的父元素 ul
-    // 2 如果点击的 li 标签，那么他的父元素是 ul
-    // 2.1 那么就取li得父元素
-    // 3 如果点击的是ul 那么直接去当前元素
-    // 4 找到UL之后，给当前 .className = "div3 zidingyi";
-    // 4.1 它的兄弟元素 .className = "div3";
-    // console.info(e.target.parentNode);
-    // if (e.target.localName === `li`) {
-    //   this.parentUl = e.target.parentNode;
-    // this.parentUl.setAttribute('class', 'selected');
-    // }
-    // if (e.target.localName === `ul`) {
-    //   this.parentUl = e.target;
-    // this.parentUl.setAttribute('class', 'selected');
-    // }
-    // if (e.target.localName === `span` || e.target.localName === `i`) {
-    // this.parentUl = e.target.parentNode.parentNode;
-    // this.parentUl.setAttribute('class', 'selected');
-    // }
-
 
     // // 单击事件倒计时
     // this.timeout = setTimeout(() => {

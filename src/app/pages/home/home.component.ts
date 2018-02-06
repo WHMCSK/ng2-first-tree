@@ -34,8 +34,6 @@ export class HomeComponent {
       {title: 'edit', text: '修改'},
       {title: 'delete', text: '删除'},
     ],
-    nodeclick: this.onclick,
-  
     filter:{
       isShow:true
     },
