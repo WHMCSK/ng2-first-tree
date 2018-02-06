@@ -37,16 +37,16 @@ export class TreeNodeComponent {
         this.tree.rightClick(obj,event,htmlnode);
     }
     getTitle(obj){
-        return obj[this.newSettings.displayName];
+        return obj[this.newSettings.display.displayName];
     }
     getText(obj){
-        if(obj[this.newSettings.displayName].length>this.newSettings.displayLength)
+        if(obj[this.newSettings.display.displayName].length>this.newSettings.display.displayLength)
         {
-            return obj[this.newSettings.displayName].substring(0,this.newSettings.displayLength-1)+"...";
+            return obj[this.newSettings.display.displayName].substring(0,this.newSettings.display.displayLength-1)+"...";
         }
         else
         {
-            return obj[this.newSettings.displayName];
+            return obj[this.newSettings.display.displayName];
         }
     }
 }

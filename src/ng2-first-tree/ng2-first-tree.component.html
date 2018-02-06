@@ -1,4 +1,4 @@
-<div [class]="newSettings.treeClass">
+<div [class]="newSettings.display.treeClass">
     <!-- 折叠展开组件 -->
     <ng2-tree-foldedExpansion [newSettings]="newSettings" [data]="data" (allFolded)="allFolded.emit($event)" (allExpansion)="allExpansion.emit($event)">
     </ng2-tree-foldedExpansion>
@@ -6,8 +6,8 @@
     <ng2-tree-filter [newSettings]="newSettings" [data]="data" (searchEvent)="search($event)"></ng2-tree-filter>
     <!-- <P [ngClass]="{'selected':true}">水电费大幅度</P> [ngClass]="{'selected': a.selected}"-->
     <div #box 
-    [style.height.px]="newSettings.displayNode*newSettings.nodeHeight" 
-    [style.overflow-y]="newSettings.yScroll">
+    [style.height.px]="newSettings.display.displayNode*newSettings.display.nodeHeight" 
+    [style.overflow-y]="newSettings.display.yScroll">
       <tree-node [treeData]="data"></tree-node>
     </div>
     <!--右键的弹出框 menuShow:是否右键功能-->

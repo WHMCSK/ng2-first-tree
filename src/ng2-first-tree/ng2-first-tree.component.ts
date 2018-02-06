@@ -48,12 +48,14 @@ export class Ng2FirstTreeComponent {
 
   // 默认配置
   defaultSettings = {
-    displayLength:10,                        //  节点文本显示长度
-    displayName:"text",                      //  节点显示字段
-    displayNode:5,                           //  显示多少个节点
-    nodeHeight:30,                           //  每个节点高度
-    yScroll:"auto",                          //  垂直滚动条显示样式
-    treeClass:"tree-container",              //  树样式
+    display:{
+      displayLength:10,                        //  节点文本显示长度
+      displayName:"text",                      //  节点显示字段
+      displayNode:5,                           //  显示多少个节点
+      nodeHeight:30,                           //  每个节点高度
+      yScroll:"auto",                          //  垂直滚动条显示样式
+      treeClass:"tree-container",              //  树样式
+    },
     menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
     hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
@@ -83,9 +85,13 @@ export class Ng2FirstTreeComponent {
   }
   ngOnInit(): void {
     this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
-    this.showNode("");
   }
 
+  ngOnChanges(changes: SimpleChange):void {
+    if(changes['data'] && changes['data'].currentValue) {
+      this.showNode("");
+    }
+  }
 
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
@@ -163,9 +169,16 @@ export class Ng2FirstTreeComponent {
       {
         this.menuShow=true;
       }
-    this.top = htmlnode.offsetTop + 30;
-    this.left = 55;
-    this.left = htmlnode.offsetLeft + 80;
+      this.left = 55;
+      if(htmlnode.offsetParent&&htmlnode.offsetParent.offsetTop<htmlnode.offsetTop)
+      {
+        this.top = event.layerY-htmlnode.offsetTop + 30;
+      }
+      else
+      {
+        this.top = htmlnode.offsetTop + 30;
+      }
+      this.left = htmlnode.offsetLeft + 80;
     // 把被点击的对象存储
     this.tempMenuData = obj;
 
