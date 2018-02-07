@@ -230,7 +230,7 @@ export class Ng2FirstTreeComponent {
     });
   }
   showNodeRecursive(obj,searchObj){
-    if(searchObj==""||obj.text.indexOf(searchObj)==0){
+    if(searchObj==""||obj.text.indexOf(searchObj)>=0){
       obj.IsShow=true;
       if(obj.parent){
         this.showParentNode(obj.parent);
