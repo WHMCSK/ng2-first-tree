@@ -2,6 +2,7 @@ import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, Elemen
 import { AfterViewInit } from '@angular/core';
 
 import { deepExtend } from './lib/helpers';
+import { PinYinService } from './lib/pinyinService';
 
 @Component({
   selector: 'ng2-first-tree',
@@ -74,7 +75,8 @@ export class Ng2FirstTreeComponent {
 
   }
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef,
+    private pinyinSrv:PinYinService) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
       if (this.menuShow === true) {
@@ -230,7 +232,16 @@ export class Ng2FirstTreeComponent {
     });
   }
   showNodeRecursive(obj,searchObj){
-    if(searchObj==""||obj.text.indexOf(searchObj)>=0){
+    let displayName=this.defaultSettings.display.displayName;
+    if(this.newSettings!=undefined)
+    {
+      displayName=this.newSettings.display.displayName;
+    }
+    obj.pinYin = this.pinyinSrv.convertPinYin(obj[displayName]);
+    if(searchObj==""
+      || searchObj==undefined
+      ||obj[displayName].indexOf(searchObj)>=0
+      ||obj.pinYin.indexOf(searchObj)>=0){
       obj.IsShow=true;
       if(obj.parent){
         this.showParentNode(obj.parent);
