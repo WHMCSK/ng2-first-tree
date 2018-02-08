@@ -65,7 +65,7 @@ html,body{
     }
     //右键弹出
     .contextmenu{
-        position: absolute;
+        position: fixed;
         z-index: 100;
         .list{ 
               list-style: none;

@@ -13,6 +13,8 @@ export class TreeNodeComponent {
     newSettings:any;
     @Input() treeData: any;
 
+    @Output() rightClickFn = new EventEmitter<any>();
+
     constructor(private elementRef: ElementRef,
         private tree:Ng2FirstTreeComponent) {
     }
@@ -33,8 +35,12 @@ export class TreeNodeComponent {
     }
     // 右键点击事件
     rightClick(obj, event, htmlnode) {
-        console.log(this.tree.menuShow);
-        this.tree.rightClick(obj,event,htmlnode);
+        // this.tree.rightClick(obj, event, htmlnode);
+        this.rightClickFn.emit([obj, event, htmlnode]);
+    }
+    //子节点传出的右键事件
+    ChildRightClickFn(event){
+        this.rightClickFn.emit(event);
     }
     getTitle(obj){
         return obj[this.newSettings.display.displayName];

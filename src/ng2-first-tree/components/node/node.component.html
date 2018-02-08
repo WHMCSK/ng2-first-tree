@@ -11,6 +11,6 @@
         </ul>
     </div>
     <ng-container *ngIf='node.co'>
-        <tree-node [treeData]="node.children"></tree-node>
+        <tree-node [treeData]="node.children" (rightClickFn)="ChildRightClickFn($event)"></tree-node>
     </ng-container>
 </ng-container>

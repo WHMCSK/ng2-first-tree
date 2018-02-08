@@ -7,11 +7,11 @@
     <!-- <P [ngClass]="{'selected':true}">水电费大幅度</P> [ngClass]="{'selected': a.selected}"-->
     <div #box 
     [style.height.px]="newSettings.display.displayNode*newSettings.display.nodeHeight" 
-    [style.overflow-y]="newSettings.display.yScroll">
-      <tree-node [treeData]="data"></tree-node>
+    [style.overflow-y]="newSettings.display.yScroll" (scroll)="scrollFn()">
+      <tree-node [treeData]="data" (rightClickFn)="rightClickFn($event,contextmenu)"></tree-node>
     </div>
     <!--右键的弹出框 menuShow:是否右键功能-->
-    <div class="contextmenu" *ngIf="menuShow" #contextmenu [ngStyle]="{'top.px': top,'left.%': left}">
+    <div class="contextmenu" [hidden]="!menuShow" #contextmenu [ngStyle]="{'top.px': top,'left.px': left}">
         <ul class="list">
             <li class="list-item" *ngFor="let item of newSettings.menuDatas" (click)="nodeMenuClickFn(item.title)">{{item.text}}</li>
         </ul>
