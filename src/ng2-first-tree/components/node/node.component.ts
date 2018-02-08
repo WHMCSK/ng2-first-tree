@@ -25,6 +25,9 @@ export class TreeNodeComponent {
     onNodeClicked(e, obj) {
         this.tree.onNodeClicked(e,obj);
     }
+    onMouseup(e,obj){
+        this.tree.onMouseup(e,obj);
+    }
     // 双击控制tree的展示隐藏
     onNodeDblClicked(e, obj) {
         this.tree.onNodeDblClicked(e,obj);

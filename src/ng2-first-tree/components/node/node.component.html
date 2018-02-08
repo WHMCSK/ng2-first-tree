@@ -1,7 +1,7 @@
 <ng-container *ngFor='let node of treeData'>
     <div #div *ngIf='node.IsShow'>
         <ul [style.padding-left.%]="node.treeheight == 1 ? 0 :(node.treeheight-1)*7" [style.background]="node.isSelect ? newSettings.selectBgc.bgc: ''">
-            <li (click)='onNodeClicked($event,node)' (contextmenu)="rightClick(node, $event,div)" (dblclick)="onNodeDblClicked($event,node)" [class.hover]="!node.isSelect">
+            <li (click)='onNodeClicked($event,node)' (mouseup)="onMouseup($event,node)" (contextmenu)="rightClick(node, $event,div)" (dblclick)="onNodeDblClicked($event,node)" [class.hover]="!node.isSelect">
                 <i class="{{newSettings.hideicon}} fonticon" *ngIf="node.children&&!node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.showicon}} fonticon" *ngIf="node.children&&node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!node.children&&node.co" (click)="showTree(node,$event)"></i>

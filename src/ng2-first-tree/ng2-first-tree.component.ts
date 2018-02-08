@@ -26,6 +26,7 @@ export class Ng2FirstTreeComponent {
   @Output() searchEvent = new EventEmitter<any>();
   // 发射节点点击事件 单击/双击/右键
   @Output() nodeClick = new EventEmitter<any>();
+  @Output() nodeMouseup = new EventEmitter<any>();
   @Output() nodeDblClick = new EventEmitter<any>();
   @Output() nodeMenuClick = new EventEmitter<any>();
   // 判断是不是单击
@@ -95,7 +96,11 @@ export class Ng2FirstTreeComponent {
       this.showNode("");
     }
   }
-
+  onMouseup(e,obj){
+    console.log(obj);
+    
+    this.nodeMouseup.emit(obj);
+  }
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
     this.isClick = false;
