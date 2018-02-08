@@ -97,8 +97,6 @@ export class Ng2FirstTreeComponent {
     }
   }
   onMouseup(e,obj){
-    console.log(obj);
-    
     this.nodeMouseup.emit(obj);
   }
   // 传过来点击者对象。
