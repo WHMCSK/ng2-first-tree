@@ -77,7 +77,10 @@ export class Ng2FirstTreeComponent {
       lv1: false,                            // 第一级是否开启选中背景色 
     },
     foldedExpansionIsShow: false,           // 折叠展开是否显示
-
+    drag:{
+      isDrag:false,                         // 是否可拖动
+      dragTreeHeight:[2,3]                  // 可拖动的节点层级
+    }
   }
 
   constructor(private elementRef: ElementRef,
@@ -221,13 +224,16 @@ export class Ng2FirstTreeComponent {
   //显示节点
   showNode(searchObj) {
     this.data.forEach(item => {
-      this.showNodeRecursive(item, searchObj);
+      this.NodeRecursive(item, searchObj);
     });
   }
-  showNodeRecursive(obj, searchObj) {
+  //节点递归处理
+  NodeRecursive(obj, searchObj) {
     let displayName = this.defaultSettings.display.displayName;
+    let dragTreeHeight=this.defaultSettings.drag.dragTreeHeight;
     if (this.newSettings != undefined) {
       displayName = this.newSettings.display.displayName;
+      dragTreeHeight=this.newSettings.drag.dragTreeHeight;
     }
     obj.pinYin = this.pinyinSrv.convertPinYin(obj[displayName]);
     if (searchObj == ""
@@ -241,10 +247,14 @@ export class Ng2FirstTreeComponent {
     } else {
       obj.IsShow = false;
     }
+    if(dragTreeHeight.indexOf(obj.treeheight)>=0)
+    {
+      obj.isDrag=true;
+    }
     if (obj.children) {
       for (let i of obj.children) {
         i.parent = obj;
-        this.showNodeRecursive(i, searchObj);
+        this.NodeRecursive(i, searchObj);
       }
     }
   }

@@ -28,7 +28,10 @@ export class HomeComponent {
     
   };
   settings = {
-    displayLength:3,
+    display: {
+      displayLength: 10,                        //  节点文本显示长度
+      displayNode: 7,                           //  显示多少个节点
+    },
     menuDatas: [
       {title: 'add', text: '新增'},
       {title: 'edit', text: '修改'},
@@ -38,7 +41,10 @@ export class HomeComponent {
       isShow:true
     },
     // foldedExpansionIsShow: true,
-
+    drag:{
+      isDrag:true,                         // 是否可拖动
+      dragTreeHeight:2                      // 可拖动的节点层级
+    },
     selectBgc: {            // 选中行背景色
       open: true,           // 是否开启
       bgc:'#00abff',        // 配置背景色

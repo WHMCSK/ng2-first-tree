@@ -69,6 +69,7 @@ export class TreeNodeComponent {
         return true;
     }
     dropFn(obj) {
+        console.log(obj);
         this.tree.dragDrop(obj);
         return false;
     }
