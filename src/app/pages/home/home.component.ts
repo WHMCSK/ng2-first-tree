@@ -28,13 +28,12 @@ export class HomeComponent {
     
   };
   settings = {
+    displayLength:3,
     menuDatas: [
       {title: 'add', text: '新增'},
       {title: 'edit', text: '修改'},
       {title: 'delete', text: '删除'},
     ],
-    nodeclick: this.onclick,
-  
     filter:{
       isShow:true
     },
@@ -111,7 +110,6 @@ export class HomeComponent {
   }
 
   onsearch(e){
-    console.log(e);
     
   }
 
