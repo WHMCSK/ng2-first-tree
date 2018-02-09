@@ -94,6 +94,12 @@ data = [
 
 ```
 settings = {
+	displayLength:10,                        //  节点文本显示长度
+    displayName:"text",                      //  节点显示字段
+    displayNode:5,                           //  显示多少个节点
+    nodeHeight:30,                           //  每个节点高度
+    yScroll:"auto",                          //  垂直滚动条显示样式
+    treeClass:"tree-container",              //  树样式
     menu: [{
         text:"添加兄弟节点",
         clickFn:function(nodeobj){
@@ -150,7 +156,7 @@ settings = {
 
 
 现在你有一些数据在树中。
- 
+
 
 
 ## How can I support developers?

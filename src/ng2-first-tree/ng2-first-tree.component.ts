@@ -2,6 +2,8 @@ import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, Elemen
 import { AfterViewInit } from '@angular/core';
 
 import { deepExtend } from './lib/helpers';
+import { PinYinService } from './lib/pinyinService';
+import { log } from 'util';
 
 @Component({
   selector: 'ng2-first-tree',
@@ -24,11 +26,15 @@ export class Ng2FirstTreeComponent {
   @Output() searchEvent = new EventEmitter<any>();
   // 发射节点点击事件 单击/双击/右键
   @Output() nodeClick = new EventEmitter<any>();
+  @Output() nodeDragStart = new EventEmitter<any>();
+  @Output() nodeDragDrop = new EventEmitter<any>();
   @Output() nodeDblClick = new EventEmitter<any>();
   @Output() nodeMenuClick = new EventEmitter<any>();
   // 判断是不是单击
   isClick: boolean;
 
+  // 拖动节点的数据
+  dragData: any;
 
   /*
     
@@ -48,6 +54,14 @@ export class Ng2FirstTreeComponent {
 
   // 默认配置
   defaultSettings = {
+    display: {
+      displayLength: 10,                        //  节点文本显示长度
+      displayName: "text",                      //  节点显示字段
+      displayNode: 5,                           //  显示多少个节点
+      nodeHeight: 30,                           //  每个节点高度
+      yScroll: "auto",                          //  垂直滚动条显示样式
+      treeClass: "tree-container",              //  树样式
+    },
     menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
     hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
@@ -66,7 +80,8 @@ export class Ng2FirstTreeComponent {
 
   }
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef,
+    private pinyinSrv: PinYinService) {
     // 点击body关闭右键菜单
     document.body.onclick = (event) => {
       if (this.menuShow === true) {
@@ -79,31 +94,11 @@ export class Ng2FirstTreeComponent {
     this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
   }
 
-  // 1124更新
-
-
-
-  // ngOnChange(){
-  //   console.log(1);
-
-
-  // }
-
-  // 清除同级类名
-  // clearFn() {
-  //   const uls = this.elementRef.nativeElement.querySelectorAll(`.select ul`);
-  //   uls.forEach(ele => {
-  //     ele.setAttribute('class', 'a');
-  //   });
-  // }
-  // 鼠标进入
-  // onMouseEnter(e, a) {
-  //   // console.info(a);
-  //   // console.info(e);
-  //   this.mouseEnter.emit(a);
-  // }
-
-
+  ngOnChanges(changes: SimpleChange): void {
+    if (changes['data'] && changes['data'].currentValue) {
+      this.showNode("");
+    }
+  }
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
     this.isClick = false;
@@ -125,30 +120,6 @@ export class Ng2FirstTreeComponent {
         return;
       }
     }, 300);
-
-    // e.target.localName 表示当前点击的元素
-    // this.parentUl = 当前父元素UL
-    // 1 如果点击的是 i 或者 span 时候，他的父元素一定是 li
-    // 1.1 如果他的父元素是li 的时候，那么找li 的父元素 ul
-    // 2 如果点击的 li 标签，那么他的父元素是 ul
-    // 2.1 那么就取li得父元素
-    // 3 如果点击的是ul 那么直接去当前元素
-    // 4 找到UL之后，给当前 .className = "div3 zidingyi";
-    // 4.1 它的兄弟元素 .className = "div3";
-    // console.info(e.target.parentNode);
-    // if (e.target.localName === `li`) {
-    //   this.parentUl = e.target.parentNode;
-    // this.parentUl.setAttribute('class', 'selected');
-    // }
-    // if (e.target.localName === `ul`) {
-    //   this.parentUl = e.target;
-    // this.parentUl.setAttribute('class', 'selected');
-    // }
-    // if (e.target.localName === `span` || e.target.localName === `i`) {
-    // this.parentUl = e.target.parentNode.parentNode;
-    // this.parentUl.setAttribute('class', 'selected');
-    // }
-
 
     // // 单击事件倒计时
     // this.timeout = setTimeout(() => {
@@ -177,8 +148,6 @@ export class Ng2FirstTreeComponent {
   }
   // 菜单上的各种自定义事件   
   nodeMenuClickFn(item) {
-    // item.clickFn(this.clickedNode);
-    // console.log(item);
     this.nodeMenuClick.emit({
       title: item,
       data: this.tempMenuData,
@@ -187,36 +156,37 @@ export class Ng2FirstTreeComponent {
   }
 
   // 右键点击事件
-  rightClick(obj, event, htmlnode) {
+  rightClickFn(e, element) {
+    // obj, event, htmlnode
+    let obj = e[0],
+      event = e[1],
+      htmlnode = e[2];
     // 1. 阻止右键默认事件
     // 2. 显示右键菜单
     // 3. 设置菜单显示的位置
     // 4. 保存当前点击的数据
     // 5. 给当前点击的数据添加背景色
     event.preventDefault();
-    this.menuShow = !this.menuShow;
-    this.top = htmlnode.offsetTop + 30;
-    this.left = 55;
-    this.left = htmlnode.offsetLeft + 80;
+    if (this.tempMenuData == null
+      || (this.tempMenuData.treeheight == obj.treeheight
+        && this.tempMenuData.text == obj.text)) {
+      this.menuShow = !this.menuShow;
+    }
+    else {
+      this.menuShow = true;
+    }
+
+    // 右键框位置
+    setTimeout(() => {
+      this.left = htmlnode.getBoundingClientRect().left + htmlnode.clientWidth - element.scrollWidth;
+      this.top = htmlnode.getBoundingClientRect().top + htmlnode.clientHeight;
+    }, 1);
+
     // 把被点击的对象存储
     this.tempMenuData = obj;
 
     this.clearBgc();
-    obj.isSelect = true; 
-
-    // 添加背景色
-    // this.onNodeClicked(event, obj);
-    // 
-    // this.menuShow = !this.menuShow;
-
-    // 获取点击div距离父节点的距离
-    // 把当前点击点的坐标赋值给菜单div的top left
-    // this.top = htmlnode.offsetTop + 30;
-    // this.left = 55;
-    // this.left = htmlnode.offsetLeft + 80;
-    // 用margin值会影响右键
-    // console.info(`${this.left}============ ${this.top}`);
-    // console.info(obj, `点击了右键`);
+    obj.isSelect = true;
   }
   // 图标上的单击事件
   showTree(obj, event) {
@@ -224,6 +194,10 @@ export class Ng2FirstTreeComponent {
     obj.co = !obj.co;
   }
 
+  // 滚动事件
+  scrollFn() {
+    this.menuShow = false;
+  }
 
   // 清空所有点击样式
   clearBgc() {
@@ -239,5 +213,56 @@ export class Ng2FirstTreeComponent {
       }
     }
   }
-
+  //搜索功能
+  search(obj) {
+    this.showNode(obj);
+    this.searchEvent.emit(obj);
+  }
+  //显示节点
+  showNode(searchObj) {
+    this.data.forEach(item => {
+      this.showNodeRecursive(item, searchObj);
+    });
+  }
+  showNodeRecursive(obj, searchObj) {
+    let displayName = this.defaultSettings.display.displayName;
+    if (this.newSettings != undefined) {
+      displayName = this.newSettings.display.displayName;
+    }
+    obj.pinYin = this.pinyinSrv.convertPinYin(obj[displayName]);
+    if (searchObj == ""
+      || searchObj == undefined
+      || obj[displayName].indexOf(searchObj) >= 0
+      || obj.pinYin.indexOf(searchObj) >= 0) {
+      obj.IsShow = true;
+      if (obj.parent) {
+        this.showParentNode(obj.parent);
+      }
+    } else {
+      obj.IsShow = false;
+    }
+    if (obj.children) {
+      for (let i of obj.children) {
+        i.parent = obj;
+        this.showNodeRecursive(i, searchObj);
+      }
+    }
+  }
+  showParentNode(obj) {
+    obj.IsShow = true;
+    if (obj.parent) {
+      this.showParentNode(obj.parent);
+    }
+  }
+  // 拖动
+  dragStart(obj) {
+    this.dragData = obj;
+    this.nodeDragStart.emit(obj);
+  }
+  dragDrop(obj) {
+    if (this.dragData == obj) {
+      return;
+    }
+    this.nodeDragDrop.emit(obj);
+  }
 }
