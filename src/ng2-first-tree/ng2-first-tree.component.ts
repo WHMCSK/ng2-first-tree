@@ -27,7 +27,9 @@ export class Ng2FirstTreeComponent {
   // 发射节点点击事件 单击/双击/右键
   @Output() nodeClick = new EventEmitter<any>();
   @Output() nodeDragStart = new EventEmitter<any>();
+  @Output() nodeDragEnter = new EventEmitter<any>();
   @Output() nodeDragDrop = new EventEmitter<any>();
+  @Output() nodeDragEnd = new EventEmitter<any>();
   @Output() nodeDblClick = new EventEmitter<any>();
   @Output() nodeMenuClick = new EventEmitter<any>();
   // 判断是不是单击
@@ -79,7 +81,7 @@ export class Ng2FirstTreeComponent {
     foldedExpansionIsShow: false,           // 折叠展开是否显示
     drag:{
       isDrag:false,                         // 是否可拖动
-      dragTreeHeight:[2,3]                  // 可拖动的节点层级
+      dragTreeHeight:[]                  // 可拖动的节点层级
     }
   }
 
@@ -95,6 +97,7 @@ export class Ng2FirstTreeComponent {
   }
   ngOnInit(): void {
     this.newSettings = deepExtend({}, this.defaultSettings, this.settings);
+    this.showNode("");
   }
 
   ngOnChanges(changes: SimpleChange): void {
@@ -269,10 +272,16 @@ export class Ng2FirstTreeComponent {
     this.dragData = obj;
     this.nodeDragStart.emit(obj);
   }
+  dragEnter(obj){
+    this.nodeDragEnter.emit(obj);
+  }
   dragDrop(obj) {
     if (this.dragData == obj) {
       return;
     }
     this.nodeDragDrop.emit(obj);
+  }
+  dragEnd(obj){
+    this.nodeDragEnd.emit(obj);
   }
 }
