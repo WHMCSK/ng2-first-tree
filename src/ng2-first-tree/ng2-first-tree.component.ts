@@ -26,12 +26,15 @@ export class Ng2FirstTreeComponent {
   @Output() searchEvent = new EventEmitter<any>();
   // 发射节点点击事件 单击/双击/右键
   @Output() nodeClick = new EventEmitter<any>();
-  @Output() nodeMouseup = new EventEmitter<any>();
+  @Output() nodeDragStart = new EventEmitter<any>();
+  @Output() nodeDragDrop = new EventEmitter<any>();
   @Output() nodeDblClick = new EventEmitter<any>();
   @Output() nodeMenuClick = new EventEmitter<any>();
   // 判断是不是单击
   isClick: boolean;
 
+  // 拖动节点的数据
+  dragData: any;
 
   /*
     
@@ -95,9 +98,6 @@ export class Ng2FirstTreeComponent {
     if (changes['data'] && changes['data'].currentValue) {
       this.showNode("");
     }
-  }
-  onMouseup(e,obj){
-    this.nodeMouseup.emit(obj);
   }
   // 传过来点击者对象。
   onNodeClicked(e, obj) {
@@ -253,5 +253,17 @@ export class Ng2FirstTreeComponent {
     if (obj.parent) {
       this.showParentNode(obj.parent);
     }
+  }
+  // 拖动
+  dragStart(obj) {
+    this.dragData = obj;
+    this.nodeDragStart.emit(obj);
+  }
+  dragDrop(obj) {
+    if (this.dragData == obj) {
+      return;
+    }
+    this.nodeDragDrop.emit(obj);
+    console.log(obj);
   }
 }

@@ -10,31 +10,28 @@ import { Ng2FirstTreeComponent } from '../../ng2-first-tree.component'
 })
 
 export class TreeNodeComponent {
-    newSettings:any;
+    newSettings: any;
     @Input() treeData: any;
 
     @Output() rightClickFn = new EventEmitter<any>();
 
     constructor(private elementRef: ElementRef,
-        private tree:Ng2FirstTreeComponent) {
+        private tree: Ng2FirstTreeComponent) {
     }
     ngOnInit(): void {
-        this.newSettings=this.tree.newSettings;
+        this.newSettings = this.tree.newSettings;
     }
     // 传过来点击者对象。
     onNodeClicked(e, obj) {
-        this.tree.onNodeClicked(e,obj);
-    }
-    onMouseup(e,obj){
-        this.tree.onMouseup(e,obj);
+        this.tree.onNodeClicked(e, obj);
     }
     // 双击控制tree的展示隐藏
     onNodeDblClicked(e, obj) {
-        this.tree.onNodeDblClicked(e,obj);
+        this.tree.onNodeDblClicked(e, obj);
     }
     // 图标上的单击事件
     showTree(obj, event) {
-        this.tree.showTree(obj,event);
+        this.tree.showTree(obj, event);
     }
     // 右键点击事件
     rightClick(obj, event, htmlnode) {
@@ -42,20 +39,41 @@ export class TreeNodeComponent {
         this.rightClickFn.emit([obj, event, htmlnode]);
     }
     //子节点传出的右键事件
-    ChildRightClickFn(event){
+    ChildRightClickFn(event) {
         this.rightClickFn.emit(event);
     }
-    getTitle(obj){
+    getTitle(obj) {
         return obj[this.newSettings.display.displayName];
     }
-    getText(obj){
-        if(obj[this.newSettings.display.displayName].length>this.newSettings.display.displayLength)
-        {
-            return obj[this.newSettings.display.displayName].substring(0,this.newSettings.display.displayLength-1)+"...";
+    getText(obj) {
+        if (obj[this.newSettings.display.displayName].length > this.newSettings.display.displayLength) {
+            return obj[this.newSettings.display.displayName].substring(0, this.newSettings.display.displayLength - 1) + "...";
         }
-        else
-        {
+        else {
             return obj[this.newSettings.display.displayName];
         }
+    }
+    //拖动
+    dragstartFn(obj, ev) {
+        ev.dataTransfer.effectAllowed = "move";
+        ev.dataTransfer.setData("text", ev.target.innerHTML);
+        ev.dataTransfer.setDragImage(ev.target, 0, 0);
+        this.tree.dragStart(obj);
+        return true;
+    }
+    dragenterFn() {
+        return true;
+    }
+    dragoverFn(ev) {
+        ev.preventDefault();
+        return true;
+    }
+    dropFn(obj) {
+        this.tree.dragDrop(obj);
+        return false;
+    }
+    dragendFn(ev) {
+        ev.dataTransfer.clearData("text");
+        return false;
     }
 }
