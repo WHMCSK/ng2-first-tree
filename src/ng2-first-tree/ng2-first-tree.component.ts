@@ -264,6 +264,5 @@ export class Ng2FirstTreeComponent {
       return;
     }
     this.nodeDragDrop.emit(obj);
-    console.log(obj);
   }
 }
