@@ -69,7 +69,7 @@ export class TreeNodeComponent {
     }
     dragoverFn(obj,ev) {
         if (obj.isDrag) {
-            ev.dataTransfer.effectAllowed = "move";
+            ev.dataTransfer.effectAllowed = "all";
         }else{
             ev.dataTransfer.effectAllowed = "none";
         }

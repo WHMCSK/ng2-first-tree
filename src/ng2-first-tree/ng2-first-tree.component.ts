@@ -79,9 +79,9 @@ export class Ng2FirstTreeComponent {
       lv1: false,                            // 第一级是否开启选中背景色 
     },
     foldedExpansionIsShow: false,           // 折叠展开是否显示
-    drag:{
-      isDrag:false,                         // 是否可拖动
-      dragTreeHeight:[]                  // 可拖动的节点层级
+    drag: {
+      isDrag: false,                         // 是否可拖动
+      dragTreeHeight: []                  // 可拖动的节点层级
     }
   }
 
@@ -226,7 +226,7 @@ export class Ng2FirstTreeComponent {
   }
   //显示节点
   showNode(searchObj) {
-    if(this.data==undefined){
+    if (this.data == undefined) {
       return;
     }
     this.data.forEach(item => {
@@ -236,10 +236,10 @@ export class Ng2FirstTreeComponent {
   //节点递归处理
   NodeRecursive(obj, searchObj) {
     let displayName = this.defaultSettings.display.displayName;
-    let dragTreeHeight=this.defaultSettings.drag.dragTreeHeight;
+    let dragTreeHeight = this.defaultSettings.drag.dragTreeHeight;
     if (this.newSettings != undefined) {
       displayName = this.newSettings.display.displayName;
-      dragTreeHeight=this.newSettings.drag.dragTreeHeight;
+      dragTreeHeight = this.newSettings.drag.dragTreeHeight;
     }
     obj.pinYin = this.pinyinSrv.convertPinYin(obj[displayName]);
     if (searchObj == ""
@@ -253,9 +253,10 @@ export class Ng2FirstTreeComponent {
     } else {
       obj.IsShow = false;
     }
-    if(dragTreeHeight.indexOf(obj.treeheight)>=0)
-    {
-      obj.isDrag=true;
+    if (dragTreeHeight.indexOf(obj.treeheight) >= 0) {
+      obj.isDrag = true;
+    } else {
+      obj.isDrag = false;
     }
     if (obj.children) {
       for (let i of obj.children) {
@@ -271,32 +272,32 @@ export class Ng2FirstTreeComponent {
     }
   }
   // 拖动
-  dragStart(obj,ev) {
+  dragStart(obj, ev) {
     this.dragData = obj;
     this.nodeDragStart.emit({
-      node:obj,
-      event:ev
+      node: obj,
+      event: ev
     });
   }
-  dragEnter(obj,ev){
+  dragEnter(obj, ev) {
     this.nodeDragEnter.emit({
-      node:obj,
-      event:ev
+      node: obj,
+      event: ev
     });
   }
-  dragDrop(obj,ev) {
+  dragDrop(obj, ev) {
     if (this.dragData == obj) {
       return;
     }
     this.nodeDragDrop.emit({
-      node:obj,
-      event:ev
+      node: obj,
+      event: ev
     });
   }
-  dragEnd(obj,ev){
+  dragEnd(obj, ev) {
     this.nodeDragEnd.emit({
-      node:obj,
-      event:ev
+      node: obj,
+      event: ev
     });
   }
 }
