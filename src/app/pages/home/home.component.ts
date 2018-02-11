@@ -43,7 +43,7 @@ export class HomeComponent {
     // foldedExpansionIsShow: true,
     drag:{
       isDrag:true,                         // 是否可拖动
-      dragTreeHeight:[2]                   // 可拖动的节点层级
+      dragTreeHeight:[2,3]                   // 可拖动的节点层级
     },
     selectBgc: {            // 选中行背景色
       open: true,           // 是否开启

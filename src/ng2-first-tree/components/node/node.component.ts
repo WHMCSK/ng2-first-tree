@@ -62,7 +62,7 @@ export class TreeNodeComponent {
         return true;
     }
     dragenterFn(obj) {
-        if (this.newSettings.drag.isDrag && obj.isDrag) {
+        if (obj.isDrag) {
             this.tree.dragEnter(obj);
         }
         return true;
@@ -72,14 +72,14 @@ export class TreeNodeComponent {
         return true;
     }
     dropFn(obj) {
-        if (this.newSettings.drag.isDrag && obj.isDrag) {
+        if (obj.isDrag) {
             this.tree.dragDrop(obj);
         }
         return false;
     }
     dragendFn(obj, ev) {
         ev.dataTransfer.clearData("text");
-        if (this.newSettings.drag.isDrag && obj.isDrag) {
+        if (obj.isDrag) {
             this.tree.dragEnd(obj);
         }
         return false;

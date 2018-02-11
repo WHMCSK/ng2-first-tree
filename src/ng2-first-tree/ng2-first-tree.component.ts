@@ -226,6 +226,9 @@ export class Ng2FirstTreeComponent {
   }
   //显示节点
   showNode(searchObj) {
+    if(this.data==undefined){
+      return;
+    }
     this.data.forEach(item => {
       this.NodeRecursive(item, searchObj);
     });
