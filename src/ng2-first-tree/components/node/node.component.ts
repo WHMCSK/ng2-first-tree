@@ -58,29 +58,34 @@ export class TreeNodeComponent {
         ev.dataTransfer.effectAllowed = "move";
         ev.dataTransfer.setData("text", ev.target.innerHTML);
         ev.dataTransfer.setDragImage(ev.target, 0, 0);
-        this.tree.dragStart(obj);
+        this.tree.dragStart(obj,ev);
         return true;
     }
-    dragenterFn(obj) {
+    dragenterFn(obj,ev) {
         if (obj.isDrag) {
-            this.tree.dragEnter(obj);
+            this.tree.dragEnter(obj,ev);
         }
         return true;
     }
-    dragoverFn(ev) {
+    dragoverFn(obj,ev) {
+        if (obj.isDrag) {
+            ev.dataTransfer.effectAllowed = "move";
+        }else{
+            ev.dataTransfer.effectAllowed = "none";
+        }
         ev.preventDefault();
         return true;
     }
-    dropFn(obj) {
+    dropFn(obj,ev) {
         if (obj.isDrag) {
-            this.tree.dragDrop(obj);
+            this.tree.dragDrop(obj,ev);
         }
         return false;
     }
     dragendFn(obj, ev) {
         ev.dataTransfer.clearData("text");
         if (obj.isDrag) {
-            this.tree.dragEnd(obj);
+            this.tree.dragEnd(obj,ev);
         }
         return false;
     }

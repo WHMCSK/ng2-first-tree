@@ -3,8 +3,8 @@
         <ul [style.padding-left.%]="node.treeheight == 1 ? 0 :(node.treeheight-1)*7" [style.background]="node.isSelect ? newSettings.selectBgc.bgc: ''">
             <li (click)='onNodeClicked($event,node)' (contextmenu)="rightClick(node, $event,div)" (dblclick)="onNodeDblClicked($event,node)" [class.hover]="!node.isSelect"
         style="cursor: hand;"        
-        [draggable]="newSettings.drag.isDrag&&node.isDrag" (dragstart)="dragstartFn(node,$event)" (dragenter)="dragenterFn(node)" (dragover)="dragoverFn($event)"
-        (drop)="dropFn(node)" (dragend)="dragendFn(node,$event)" >
+        [draggable]="newSettings.drag.isDrag&&node.isDrag" (dragstart)="dragstartFn(node,$event)" (dragenter)="dragenterFn(node,$event)" (dragover)="dragoverFn(node,$event)"
+        (drop)="dropFn(node,$event)" (dragend)="dragendFn(node,$event)" >
                 <i class="{{newSettings.hideicon}} fonticon" *ngIf="node.children&&!node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.showicon}} fonticon" *ngIf="node.children&&node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!node.children&&node.co" (click)="showTree(node,$event)"></i>

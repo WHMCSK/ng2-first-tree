@@ -271,20 +271,32 @@ export class Ng2FirstTreeComponent {
     }
   }
   // 拖动
-  dragStart(obj) {
+  dragStart(obj,ev) {
     this.dragData = obj;
-    this.nodeDragStart.emit(obj);
+    this.nodeDragStart.emit({
+      node:obj,
+      event:ev
+    });
   }
-  dragEnter(obj){
-    this.nodeDragEnter.emit(obj);
+  dragEnter(obj,ev){
+    this.nodeDragEnter.emit({
+      node:obj,
+      event:ev
+    });
   }
-  dragDrop(obj) {
+  dragDrop(obj,ev) {
     if (this.dragData == obj) {
       return;
     }
-    this.nodeDragDrop.emit(obj);
+    this.nodeDragDrop.emit({
+      node:obj,
+      event:ev
+    });
   }
-  dragEnd(obj){
-    this.nodeDragEnd.emit(obj);
+  dragEnd(obj,ev){
+    this.nodeDragEnd.emit({
+      node:obj,
+      event:ev
+    });
   }
 }
