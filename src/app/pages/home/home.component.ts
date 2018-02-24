@@ -54,13 +54,36 @@ export class HomeComponent {
  
   
   constructor(private dp: SimpleTreeService){
-      this.treedata = dp.getASimpleTree();
+    
+        let tree:any=dp.getASimpleTree();
+    for(let i=1;i<= 5;i++){
+      let new_obj = {};
+      new_obj["id"] = 8+i;
+      new_obj["text"] = (3+i)+"班";
+      new_obj["treeheight"] = 3;
+      new_obj["enableclick"] = true;
+      new_obj["collapse"] = false;
+      new_obj["visiable"] = true;
+      new_obj["children"]=[];
+      for(let j=0;j<1000;j++){
+        let new_child = {};
+        new_child["id"] = 8+i;j
+        new_child["text"] = (j)+"班";
+        new_child["treeheight"] = 3;
+        new_child["enableclick"] = true;
+        new_child["collapse"] = false;
+        new_child["visiable"] = true;
+        new_obj["children"].push(new_child);
+      }
+      tree[0].children[0].children.push(new_obj);
+  }
+      this.treedata = tree;
       // 异步promise
       dp.getTreeData().then((tree) => {
         this.treedata1 = tree;
       });
       
-  }
+    }
   onclick(obj){
     // console.info(`node clicked`);
     // console.log(obj);

@@ -4,7 +4,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
     selector: 'ng2-tree-filter',
     template: `
     <div class="tree-row " *ngIf="newSettings.filter.isShow">
-        <input type="text" placeholder="搜索" name="searchValue" [(ngModel)]="searchValue">
+        <input type="text" placeholder="搜索" name="searchValue" [(ngModel)]="searchValue" (keyup.enter)="onSearch()">
         <button class="btn btn-primary" (click)="onSearch()">搜索</button>
     </div>
     `,
