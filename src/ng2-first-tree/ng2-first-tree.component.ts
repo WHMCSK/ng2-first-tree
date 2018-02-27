@@ -61,7 +61,9 @@ export class Ng2FirstTreeComponent {
       displayName: "text",                      //  节点显示字段
       displayNode: 5,                           //  显示多少个节点
       nodeHeight: 30,                           //  每个节点高度
+      nodeWidth: 200,                           //  每个节点宽度
       yScroll: "auto",                          //  垂直滚动条显示样式
+      xScroll: "auto",                          //  横向滚动条显示样式
       treeClass: "tree-container",              //  树样式
     },
     menuDatas: [],
@@ -126,22 +128,6 @@ export class Ng2FirstTreeComponent {
         return;
       }
     }, 300);
-
-    // // 单击事件倒计时
-    // this.timeout = setTimeout(() => {
-    //   this.settings.nodeclick(obj);
-    //   // console.info(`单击`);
-    // }, 300);
-
-    // // 两次点击时间差
-    // const clickBuffer = this.temp - this.tempTime;
-    // // 如果双击 立即执行双击函数 并且清除单击事件倒计时
-    // if (clickBuffer && clickBuffer < 300) {
-    //   this.onToggle(obj);
-    //   clearTimeout(this.timeout);
-    // }
-
-
   }
 
 
@@ -173,6 +159,7 @@ export class Ng2FirstTreeComponent {
     // 4. 保存当前点击的数据
     // 5. 给当前点击的数据添加背景色
     event.preventDefault();
+    //菜单是否显示
     if (this.tempMenuData == null
       || (this.tempMenuData.treeheight == obj.treeheight
         && this.tempMenuData.text == obj.text)) {
@@ -181,6 +168,14 @@ export class Ng2FirstTreeComponent {
     else {
       this.menuShow = true;
     }
+    //菜单根据配置显示隐藏
+    this.newSettings.menuDatas.forEach(md => {
+      if(!md.treeHeight||md.treeHeight.indexOf(obj.treeheight)>=0){
+        md.is_show=true;
+      }else{
+        md.is_show=false;
+      }
+    });
 
     // 右键框位置
     setTimeout(() => {
@@ -235,13 +230,16 @@ export class Ng2FirstTreeComponent {
   }
   //节点递归处理
   NodeRecursive(obj, searchObj) {
+    //初始化设置处理
     let displayName = this.defaultSettings.display.displayName;
     let dragTreeHeight = this.defaultSettings.drag.dragTreeHeight;
     if (this.newSettings != undefined) {
       displayName = this.newSettings.display.displayName;
       dragTreeHeight = this.newSettings.drag.dragTreeHeight;
     }
+    //支持拼音
     obj.pinYin = this.pinyinSrv.convertPinYin(obj[displayName]);
+    //节点显示隐藏控制
     if (searchObj == ""
       || searchObj == undefined
       || obj[displayName].indexOf(searchObj) >= 0
@@ -253,11 +251,13 @@ export class Ng2FirstTreeComponent {
     } else {
       obj.IsShow = false;
     }
+    //是否拖动处理
     if (dragTreeHeight.indexOf(obj.treeheight) >= 0) {
       obj.isDrag = true;
     } else {
       obj.isDrag = false;
     }
+    //子节点处理
     if (obj.children) {
       for (let i of obj.children) {
         i.parent = obj;

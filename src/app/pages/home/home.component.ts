@@ -33,9 +33,9 @@ export class HomeComponent {
       displayNode: 7,                           //  显示多少个节点
     },
     menuDatas: [
-      {title: 'add', text: '新增'},
+      {title: 'add', text: '新增',treeHeight:[1]},
       {title: 'edit', text: '修改'},
-      {title: 'delete', text: '删除'},
+      {title: 'delete', text: '删除',treeHeight:[1,3,4,5]},
     ],
     filter:{
       isShow:true
@@ -62,17 +62,17 @@ export class HomeComponent {
       new_obj["text"] = (3+i)+"班";
       new_obj["treeheight"] = 3;
       new_obj["enableclick"] = true;
-      new_obj["collapse"] = false;
-      new_obj["visiable"] = true;
+      new_obj["co"] = false;
+      new_obj["IsShow"] = true;
       new_obj["children"]=[];
-      for(let j=0;j<1000;j++){
+      for(let j=0;j<100;j++){
         let new_child = {};
         new_child["id"] = 8+i;j
         new_child["text"] = (j)+"班";
-        new_child["treeheight"] = 3;
+        new_child["treeheight"] = 4;
         new_child["enableclick"] = true;
-        new_child["collapse"] = false;
-        new_child["visiable"] = true;
+        new_child["co"] = false;
+        new_child["IsShow"] = true;
         new_obj["children"].push(new_child);
       }
       tree[0].children[0].children.push(new_obj);

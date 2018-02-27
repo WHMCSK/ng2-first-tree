@@ -47,21 +47,21 @@ data = [
         id: 1,
         text: "学校",
         treeheight: 1,
-        enableclick: true,
+        IsShow: true,
         co: true,
         children: [
             {
                 id: 2,
                 text: "计算机系",
                 treeheight: 2,
-                enableclick: true,
+                IsShow: true,
                 co:true,
                 children: [
                     {
                         id: 6,
                         text: "一班",
                         treeheight: 3,
-                        enableclick: true,
+                        IsShow: true,
                     }
                 ]
             },{
@@ -69,65 +69,65 @@ data = [
                 text: "经济系",
                 treeheight: 2,
                 co:true,
-                enableclick: true,
+                IsShow: true,
             }
         ]
     },{
         id: 3,
         text: "医院",
         treeheight: 1,
-        enableclick: true,
+        IsShow: true,
         co: false,
         children: [
             {
                 id: 5,
                 text: "计算机系",
                 treeheight: 2,
-                enableclick: true,
+                IsShow: true,
             }
         ]
     }
 ];
-
 ```
 我们还需要配置一些其他的属性，如右键菜单展示的结构，单击时触发的事件，展示隐藏时候的图标class名
 
 ```
 settings = {
-	displayLength:10,                        //  节点文本显示长度
-    displayName:"text",                      //  节点显示字段
-    displayNode:5,                           //  显示多少个节点
-    nodeHeight:30,                           //  每个节点高度
-    yScroll:"auto",                          //  垂直滚动条显示样式
-    treeClass:"tree-container",              //  树样式
+	display: {
+      displayLength: 10,                        //  节点文本显示长度
+      displayName: "text",                      //  节点显示字段
+      displayNode: 5,                           //  显示多少个节点
+      nodeHeight: 30,                           //  每个节点高度
+      nodeWidth: 100,                           //  每个节点宽度
+      yScroll: "auto",                          //  垂直滚动条显示样式
+      xScroll: "auto",                          //  横向滚动条显示样式
+      treeClass: "tree-container",              //  树样式
+    },
     menu: [{
         text:"添加兄弟节点",
-        clickFn:function(nodeobj){
-        console.log(nodeobj);
-            console.log("添加兄弟节点");          
-        }
+        title:"add",
+        treeHeight:[1]							// 菜单显示层级，全显示无需设置
     },{
         text:"添加子节点",
-        clickFn:function(nodeobj){
-        console.log(nodeobj);
-            console.log("添加子节点");  
-        }
+        title:"add"
     },{
         text:"删除",
-        clickFn:function(nodeobj){
-        console.log(nodeobj);
-            console.log("删除");
-        }
+        title:"delete"
     },{
         text:"修改",
-        clickFn:function(nodeobj){
-        console.log(nodeobj);
-            console.log("修改");
-        }
+        title:"delete",
+        treeHeight:[1]
     },],
-    nodeclick: () => {
-
+    filter: {                                //  搜索配置  暂时没有
+      type: '',                              //  客户端过滤|服务端过滤   serverfilter|clientfilter
+      class: '',                             //  搜索框的 类名
+      isShow: false,                         //  搜索框是否
     },
+    foldedExpansionIsShow: false,           // 折叠展开是否显示
+    drag: {
+      isDrag: false,                         // 是否可拖动
+      dragTreeHeight: []                  // 可拖动的节点层级
+    }
     showicon: `icon ion-filing`,
     hideicon: `icon ion-folder`,
     wenjicon: `icon ion-document-text`,
