@@ -1,6 +1,6 @@
 <ng-container *ngFor='let node of treeData'>
     <div #div [hidden]='!node.IsShow' [style.width.px]="newSettings.display.nodeWidth">
-        <ul [style.padding-left.%]="node.treeheight == 1 ? 0 :(node.treeheight-1)*7" [style.background]="node.isSelect ? newSettings.selectBgc.bgc: ''">
+        <ul [style.padding-left.%]="node.nodeDeep == 1 ? 0 :(node.nodeDeep-1)*7" [style.background]="node.isSelect ? newSettings.selectBgc.bgc: ''">
             <li (click)='onNodeClicked($event,node)' (contextmenu)="rightClick(node, $event,div)" (dblclick)="onNodeDblClicked($event,node)" [class.hover]="!node.isSelect"
         style="cursor: hand;"        
         [draggable]="newSettings.drag.isDrag&&node.isDrag" (dragstart)="dragstartFn(node,$event)" (dragenter)="dragenterFn(node,$event)" (dragover)="dragoverFn(node,$event)"

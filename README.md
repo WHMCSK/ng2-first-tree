@@ -46,28 +46,28 @@ data = [
     {
         id: 1,
         text: "学校",
-        treeheight: 1,
+        nodeDeep: 1,
         IsShow: true,
         co: true,
         children: [
             {
                 id: 2,
                 text: "计算机系",
-                treeheight: 2,
+                nodeDeep: 2,
                 IsShow: true,
                 co:true,
                 children: [
                     {
                         id: 6,
                         text: "一班",
-                        treeheight: 3,
+                        nodeDeep: 3,
                         IsShow: true,
                     }
                 ]
             },{
                 id: 4,
                 text: "经济系",
-                treeheight: 2,
+                nodeDeep: 2,
                 co:true,
                 IsShow: true,
             }
@@ -75,14 +75,14 @@ data = [
     },{
         id: 3,
         text: "医院",
-        treeheight: 1,
+        nodeDeep: 1,
         IsShow: true,
         co: false,
         children: [
             {
                 id: 5,
                 text: "计算机系",
-                treeheight: 2,
+                nodeDeep: 2,
                 IsShow: true,
             }
         ]
@@ -106,7 +106,7 @@ settings = {
     menu: [{
         text:"添加兄弟节点",
         title:"add",
-        treeHeight:[1]							// 菜单显示层级，全显示无需设置
+        nodeDeeps:[1]							// 菜单显示层级，全显示无需设置
     },{
         text:"添加子节点",
         title:"add"
@@ -116,8 +116,10 @@ settings = {
     },{
         text:"修改",
         title:"delete",
-        treeHeight:[1]
+        nodeDeeps:[1]
     },],
+    enableclick:[1,3],                          //  可点击层级
+    treeHeight:0,                            //  树高
     filter: {                                //  搜索配置  暂时没有
       type: '',                              //  客户端过滤|服务端过滤   serverfilter|clientfilter
       class: '',                             //  搜索框的 类名
@@ -128,11 +130,9 @@ settings = {
       isDrag: false,                         // 是否可拖动
       dragTreeHeight: []                  // 可拖动的节点层级
     }
-    showicon: `icon ion-filing`,
-    hideicon: `icon ion-folder`,
-    wenjicon: `icon ion-document-text`,
-    filterstyle: `isshow`,//isshow|mark
-    filtertype: `clientfilter`,//serverfilter|clientfilter
+     showicon: `icon ion-filing`,             //  子节点展开时的图标， 
+    hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， 
+    noChildicon: `icon ion-document-text`,   //  没有子节点时的图标， 
     selectBgc: {            // 选中行背景色   此项不填写，默认为open: false
       open: true,           // 是否开启
       bgc:'#00abff',        // 配置背景色

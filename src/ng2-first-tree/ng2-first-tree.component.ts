@@ -66,6 +66,8 @@ export class Ng2FirstTreeComponent {
       xScroll: "auto",                          //  横向滚动条显示样式
       treeClass: "tree-container",              //  树样式
     },
+    enableclick:[1,3],                          //  可点击层级
+    treeHeight:0,                            //  树高
     menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
     hideicon: `icon ion-folder`,             //  子节点隐藏时的图标， hideicon：`icon ion-folder`
@@ -136,6 +138,10 @@ export class Ng2FirstTreeComponent {
     this.isClick = true;
     obj.co = !obj.co;
 
+    if(this.newSettings.enableclick.length!=0
+      &&this.newSettings.enableclick.indexOf(obj.nodeDeep)<0){
+          return;
+    }
     this.nodeDblClick.emit(obj);
   }
   // 菜单上的各种自定义事件   
@@ -161,7 +167,7 @@ export class Ng2FirstTreeComponent {
     event.preventDefault();
     //菜单是否显示
     if (this.tempMenuData == null
-      || (this.tempMenuData.treeheight == obj.treeheight
+      || (this.tempMenuData.nodeDeep == obj.nodeDeep
         && this.tempMenuData.text == obj.text)) {
       this.menuShow = !this.menuShow;
     }
@@ -170,7 +176,7 @@ export class Ng2FirstTreeComponent {
     }
     //菜单根据配置显示隐藏
     this.newSettings.menuDatas.forEach(md => {
-      if(!md.treeHeight||md.treeHeight.indexOf(obj.treeheight)>=0){
+      if(!md.nodeDeeps||md.nodeDeeps.indexOf(obj.nodeDeep)>=0){
         md.is_show=true;
       }else{
         md.is_show=false;
@@ -224,18 +230,22 @@ export class Ng2FirstTreeComponent {
     if (this.data == undefined) {
       return;
     }
+    let setting=this.defaultSettings;
+    if(this.newSettings != undefined){
+      setting=this.newSettings;
+    }
     this.data.forEach(item => {
-      this.NodeRecursive(item, searchObj);
+      this.NodeRecursive(item, searchObj,0,setting);
     });
   }
   //节点递归处理
-  NodeRecursive(obj, searchObj) {
+  NodeRecursive(obj, searchObj,treeHeight,setting) {
     //初始化设置处理
-    let displayName = this.defaultSettings.display.displayName;
-    let dragTreeHeight = this.defaultSettings.drag.dragTreeHeight;
-    if (this.newSettings != undefined) {
-      displayName = this.newSettings.display.displayName;
-      dragTreeHeight = this.newSettings.drag.dragTreeHeight;
+    treeHeight+=1;
+    let displayName = setting.display.displayName;
+    let dragTreeHeight = setting.drag.dragTreeHeight;
+    if(treeHeight>setting.treeHeight){
+      setting.treeHeight=treeHeight;
     }
     //支持拼音
     obj.pinYin = this.pinyinSrv.convertPinYin(obj[displayName]);
@@ -251,8 +261,11 @@ export class Ng2FirstTreeComponent {
     } else {
       obj.IsShow = false;
     }
+    if(obj.nodeDeep==undefined){
+      obj.nodeDeep=treeHeight;
+    }
     //是否拖动处理
-    if (dragTreeHeight.indexOf(obj.treeheight) >= 0) {
+    if (dragTreeHeight.indexOf(obj.nodeDeep) >= 0) {
       obj.isDrag = true;
     } else {
       obj.isDrag = false;
@@ -261,7 +274,7 @@ export class Ng2FirstTreeComponent {
     if (obj.children) {
       for (let i of obj.children) {
         i.parent = obj;
-        this.NodeRecursive(i, searchObj);
+        this.NodeRecursive(i, searchObj,treeHeight,setting);
       }
     }
   }

@@ -33,9 +33,9 @@ export class HomeComponent {
       displayNode: 7,                           //  显示多少个节点
     },
     menuDatas: [
-      {title: 'add', text: '新增',treeHeight:[1]},
+      {title: 'add', text: '新增',nodeDeeps:[1]},
       {title: 'edit', text: '修改'},
-      {title: 'delete', text: '删除',treeHeight:[1,3,4,5]},
+      {title: 'delete', text: '删除',nodeDeeps:[1,3,4,5]},
     ],
     filter:{
       isShow:true

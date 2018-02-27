@@ -23,6 +23,10 @@ export class TreeNodeComponent {
     }
     // 传过来点击者对象。
     onNodeClicked(e, obj) {
+        if(this.newSettings.enableclick.length!=0
+            &&this.newSettings.enableclick.indexOf(obj.nodeDeep)<0){
+                return;
+        }
         this.tree.onNodeClicked(e, obj);
     }
     // 双击控制tree的展示隐藏
@@ -35,7 +39,10 @@ export class TreeNodeComponent {
     }
     // 右键点击事件
     rightClick(obj, event, htmlnode) {
-        // this.tree.rightClick(obj, event, htmlnode);
+        if(this.newSettings.enableclick.length!=0
+            &&this.newSettings.enableclick.indexOf(obj.nodeDeep)<0){
+                return;
+        }
         this.rightClickFn.emit([obj, event, htmlnode]);
     }
     //子节点传出的右键事件
