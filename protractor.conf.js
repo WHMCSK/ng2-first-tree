@@ -1,9 +1,9 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 // git pull jf master
-// git commit -m '发布了v2.0.23'
+// git commit -m '发布了v2.1.2'
 // git push jf master
-// git tag "v2.0.23" -m "发布v2.0.23"
+// git tag "v2.1.2" -m "发布v2.1.2"
 // git push --tags jf master
 // npm publish
 const { SpecReporter } = require('jasmine-spec-reporter');
