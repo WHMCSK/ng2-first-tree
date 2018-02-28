@@ -49,6 +49,15 @@ export class TreeNodeComponent {
     ChildRightClickFn(event) {
         this.rightClickFn.emit(event);
     }
+    existsChildren(obj){
+        if(obj.children==undefined){
+            return false;
+        }
+        if(obj.children.length==0){
+            return false;
+        }
+        return true;
+    }
     getTitle(obj) {
         return obj[this.newSettings.display.displayName];
     }

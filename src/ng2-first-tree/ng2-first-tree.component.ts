@@ -66,7 +66,7 @@ export class Ng2FirstTreeComponent {
       xScroll: "auto",                          //  横向滚动条显示样式
       treeClass: "tree-container",              //  树样式
     },
-    enableclick:[1,3],                          //  可点击层级
+    enableclick:[],                          //  可点击层级
     treeHeight:0,                            //  树高
     menuDatas: [],
     showicon: `icon ion-filing`,             //  子节点展开时的图标， showicon：`icon ion-filing`
