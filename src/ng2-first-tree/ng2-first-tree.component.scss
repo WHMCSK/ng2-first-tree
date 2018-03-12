@@ -48,6 +48,9 @@ html,body{
             list-style: none;
             height:1.8rem;
             line-height: 1.78rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .hover:hover{
             color:#00abff;

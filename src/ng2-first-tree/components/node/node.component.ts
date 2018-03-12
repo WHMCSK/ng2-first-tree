@@ -62,12 +62,13 @@ export class TreeNodeComponent {
         return obj[this.newSettings.display.displayName];
     }
     getText(obj) {
-        if (obj[this.newSettings.display.displayName].length > this.newSettings.display.displayLength) {
-            return obj[this.newSettings.display.displayName].substring(0, this.newSettings.display.displayLength - 1) + "...";
-        }
-        else {
-            return obj[this.newSettings.display.displayName];
-        }
+        // if (obj[this.newSettings.display.displayName].length > this.newSettings.display.displayLength) {
+        //     return obj[this.newSettings.display.displayName].substring(0, this.newSettings.display.displayLength - 1) + "...";
+        // }
+        // else {
+        //     return obj[this.newSettings.display.displayName];
+        // }
+        return obj[this.newSettings.display.displayName];
     }
     //拖动
     dragstartFn(obj, ev) {

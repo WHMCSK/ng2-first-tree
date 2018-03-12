@@ -9,7 +9,7 @@
                 <i class="{{newSettings.showicon}} fonticon" *ngIf="existsChildren(node)&&node.co" (click)="showTree(node,$event)"></i>
                 <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!existsChildren(node)" (click)="showTree(node,$event)"></i>
                 <!-- <i class="{{newSettings.noChildicon}} fonticon" *ngIf="!node.children&&!node.co" (click)="showTree(node,$event)"></i> -->
-                <span [title]="getTitle(node)">{{ getText(node) }}</span>
+                <span [title]="getTitle(node)" >{{ getText(node) }}</span>
             </li>
         </ul>
     </div>
